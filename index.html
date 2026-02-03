@@ -6,6 +6,7 @@
     <title>CallVa - Company Profile</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="Icon.png" type="image/png"/>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
@@ -123,7 +124,9 @@
             font-size: 4rem;
             background: var(--gradient-main);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+            color: transparent;
             margin-bottom: 10px;
             letter-spacing: -1px;
         }
@@ -174,7 +177,7 @@
         .cover-slide {
             text-align: center;
             justify-content: center;
-            background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(230,230,250,0.3) 100%);
+            background: linear-gradient(180deg, rgba(255,255,255,255,0) 0%, rgba(230,230,250,0.3) 100%);
         }
         .cover-slide .logo-large {
             font-size: 6rem;
@@ -428,6 +431,29 @@
             gap: 10px;
         }
 
+        /* Print Button */
+        .print-btn {
+            background: white;
+            border: 1px solid rgba(119, 0, 196, 0.2);
+            border-radius: 30px;
+            padding: 8px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--primary-purple);
+        }
+
+        .print-btn:hover {
+            background: var(--gradient-main);
+            color: white;
+            border-color: transparent;
+        }
+
         /* Decorative Elements */
         .bg-circle {
             position: absolute;
@@ -467,7 +493,7 @@
             display: block;
         }
 
-        /* Service Profile Modal */
+        /* Service Profile Modal - REDESIGNED */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -480,6 +506,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            backdrop-filter: blur(5px);
         }
 
         .modal-overlay.active {
@@ -487,23 +514,55 @@
         }
 
         .modal-container {
-            background: white;
-            border-radius: 16px;
-            width: 100%;
+            background: var(--white);
+            border-radius: 24px;
+            width: 90%;
             max-width: 1200px;
             max-height: 90vh;
-            overflow-y: auto;
-            padding: 40px;
-            position: relative;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.3s ease-out;
         }
 
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #f0f0f0;
-            border: none;
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .modal-header {
+            padding: 30px 40px;
+            background: var(--gradient-soft);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(119, 0, 196, 0.1);
+        }
+
+        .modal-title-large {
+            font-size: 2rem;
+            color: var(--primary-purple);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .modal-title-large i {
+            font-size: 2.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-close,
+        .modal-print {
+            background: white;
+            border: 1px solid rgba(119, 0, 196, 0.2);
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -512,126 +571,34 @@
             justify-content: center;
             align-items: center;
             font-size: 24px;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
+            color: var(--primary-purple);
+            transition: all 0.2s ease;
             z-index: 10;
         }
 
-        body.en-version .modal-close {
-            right: auto;
-            left: 20px;
-        }
-
-        .modal-close:hover {
+        .modal-close:hover,
+        .modal-print:hover {
             background: var(--primary-purple);
             color: white;
         }
 
-        .modal-title {
-            font-size: 2rem;
-            color: var(--secondary-blue);
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #eee;
-        }
-
-        .modal-section {
-            margin-bottom: 30px;
-        }
-
-        .modal-section-title {
-            font-size: 1.5rem;
-            color: var(--primary-purple);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal-section-title i {
-            font-size: 1.8rem;
-        }
-
-        .modal-content {
-            line-height: 1.8;
-            color: var(--text-gray);
-        }
-
-        .modal-list {
-            list-style: none;
-            padding-right: 0;
-        }
-
-        body.en-version .modal-list {
-            padding-right: 20px;
-            padding-left: 0;
-        }
-
-        .modal-list li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-right: 30px;
-        }
-
-        body.en-version .modal-list li {
-            padding-right: 0;
-            padding-left: 30px;
-        }
-
-        .modal-list li::before {
-            content: '•';
-            position: absolute;
-            right: 0;
-            color: var(--primary-purple);
-            font-size: 1.5rem;
-            line-height: 1;
-        }
-
-        body.en-version .modal-list li::before {
-            right: auto;
-            left: 0;
-        }
-
-        .modal-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .modal-card {
-            background: #f9f9fc;
-            padding: 20px;
-            border-radius: 10px;
-            border-right: 3px solid var(--primary-purple);
-        }
-
-        body.en-version .modal-card {
-            border-right: none;
-            border-left: 3px solid var(--primary-purple);
-        }
-
-        .modal-card-title {
-            font-weight: 700;
-            color: var(--secondary-blue);
-            margin-bottom: 10px;
-        }
-
-        .modal-card-content {
-            font-size: 0.9rem;
-            color: var(--text-gray);
+        .modal-body {
+            padding: 40px;
+            overflow-y: auto;
+            flex: 1;
         }
 
         .modal-tabs {
             display: flex;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             border-bottom: 2px solid #eee;
         }
 
         .modal-tab {
-            padding: 10px 20px;
+            padding: 15px 30px;
             cursor: pointer;
-            font-weight: 600;
+            font-weight: 700;
+            font-size: 1.1rem;
             color: var(--text-gray);
             transition: all 0.3s ease;
             position: relative;
@@ -645,15 +612,268 @@
             content: '';
             position: absolute;
             bottom: -2px;
-            left: 0;
+            right: 0;
             width: 100%;
-            height: 2px;
-            background: var(--primary-purple);
+            height: 3px;
+            background: var(--gradient-main);
+            border-radius: 3px 3px 0 0;
+        }
+
+        body.en-version .modal-tab.active::after {
+            right: auto;
+            left: 0;
+            border-radius: 0 0 3px 3px;
+        }
+
+        .section-block {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            color: var(--secondary-blue);
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--primary-purple);
+            font-size: 1.6rem;
+        }
+
+        .info-card {
+            background: white;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .grid-card-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .highlight-card {
+            background: linear-gradient(135deg, #fff 0%, #f9f9fc 100%);
+            border-left: 5px solid var(--primary-purple);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        body.en-version .highlight-card {
+            border-left: none;
+            border-right: 5px solid var(--primary-purple);
+        }
+        
+        .highlight-card i {
+            color: var(--secondary-blue);
+            font-size: 2rem;
+            margin-top: 3px;
+        }
+
+        .challenge-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .challenge-item {
+            background: #FFF5F5;
+            border: 1px solid #FFEBEE;
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: #C62828;
+            font-size: 0.95rem;
+        }
+        
+        .solution-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .solution-item {
+            background: #F3E5F5;
+            border: 1px solid rgba(119, 0, 196, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .solution-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(119, 0, 196, 0.15);
+        }
+
+        .roi-section {
+            background: var(--gradient-main);
+            color: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .roi-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .roi-item {
+            background: rgba(255,255,255, 0.1);
+            border: 1px solid rgba(255,255,255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            font-weight: 600;
         }
 
         /* Utility */
         .en-font { font-family: var(--font-en); }
         .hidden { display: none; }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+                color: black;
+                display: block;
+                height: auto;
+                overflow: visible;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            /* تصغير حجم صفحة Service Profile لتحتوي كل المحتوى في ورقة A4 واحدة قدر الإمكان */
+            body.print-service {
+                zoom: 0.68;
+            }
+            
+            .presentation-container {
+                width: 100%;
+                max-width: none;
+                aspect-ratio: auto;
+                box-shadow: none;
+                border-radius: 0;
+                display: block;
+                overflow: visible;
+            }
+            
+            .nav-container, .lang-toggle, .bg-circle {
+                display: none !important;
+            }
+            
+            .slide {
+                position: relative;
+                opacity: 1;
+                visibility: visible;
+                page-break-after: always;
+                padding: 40px;
+                min-height: 100vh; /* مساوية تقريباً لارتفاع صفحة A4 */
+                display: flex;
+                flex-direction: column;
+                justify-content: center; /* توسيط عمودي لكل الشرائح */
+            }
+
+            /* عند طباعة Service Profile نخفي الشرائح ونطبع المودال فقط */
+            body.print-service .slide {
+                display: none !important;
+            }
+
+            .slide-number {
+                position: static;
+                margin-bottom: 10px;
+                font-size: 10pt;
+                color: #999;
+            }
+            
+            .slide-title {
+                color: var(--secondary-blue);
+                font-size: 20pt;
+                margin-bottom: 20px;
+            }
+            
+            .slide-content {
+                font-size: 11pt;
+                line-height: 1.6;
+                color: black;
+            }
+            
+            .service-card, .industry-card, .feature-item {
+                break-inside: avoid;
+                border: 1px solid #ddd;
+                margin-bottom: 10px;
+                page-break-inside: avoid;
+            }
+            
+            .grid-2, .grid-3 {
+                display: grid;
+                gap: 20px;
+            }
+
+            /* طباعة Service Profile (المودال) فقط */
+            body.print-service .presentation-container {
+                display: none !important;
+            }
+
+            body.print-service .modal-overlay {
+                display: block !important;
+                position: static;
+                background: none;
+                padding: 0;
+            }
+
+            body.print-service .modal-container {
+                width: 100%;
+                max-width: none;
+                max-height: none;
+                border-radius: 0;
+                box-shadow: none;
+            }
+
+            body.print-service .modal-body {
+                overflow: visible;
+                font-size: 10pt;
+                line-height: 1.4;
+            }
+
+            body.print-service .modal-actions {
+                display: none;
+            }
+            
+            @page {
+                size: A4; /* طولي (Portrait) */
+                margin: 1cm;
+            }
+            
+            h1, h2, h3 {
+                color: var(--secondary-blue);
+                page-break-after: avoid;
+            }
+        }
         
         @media (max-width: 768px) {
             .slide {
@@ -661,12 +881,16 @@
             }
             
             .modal-container {
-                padding: 20px;
-                max-height: 95vh;
+                width: 95%;
+                border-radius: 16px;
             }
-            
-            .modal-title {
-                font-size: 1.5rem;
+
+            .modal-header, .modal-body {
+                padding: 20px;
+            }
+
+            .grid-card-2, .challenge-list, .solution-list, .roi-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -710,7 +934,7 @@
             </div>
             <div class="en-content">
                 <p>CallVa is a specialized company in Business Process Outsourcing (BPO) and cloud communication systems. We work as a direct operational partner for our clients in managing customer experience, follow-up, and operational support across various industries.</p>
-                <p style="margin-top: 20px;">We represent your brand to your customers with complete professionalism, from the first contact until after service completion, with trained teams, flexible systems, and high scalability.</p>
+                <p style="margin-top: 20px;">We represent your brand to your customers with complete professionalism, from first contact until after service completion, with trained teams, flexible systems, and high scalability.</p>
             </div>
             <div style="margin-top: 40px; display: flex; justify-content: center; gap: 30px;">
                 <i class="material-icons" style="font-size: 40px; color: var(--primary-purple);">handshake</i>
@@ -778,7 +1002,7 @@
     <div class="slide" id="slide-5">
         <div class="slide-number">04</div>
         <h2 class="slide-title">
-            <span class="ar-content">ما الذي يميز كولفا؟</span>
+            <span class="ar-content">ما الذي يميز كالفا؟</span>
             <span class="en-content">What Makes CallVa Different?</span>
         </h2>
         <div class="grid-2">
@@ -1152,7 +1376,7 @@
     <div class="slide" id="slide-11">
         <div class="slide-number">10</div>
         <h2 class="slide-title">
-            <span class="ar-content">لماذا تختار كولفا شريكاً لك؟</span>
+            <span class="ar-content">لماذا تختار كالفا شريكاً لك؟</span>
             <span class="en-content">Why Partner With CallVa?</span>
         </h2>
         <ul class="feature-list" style="margin-top: 30px;">
@@ -1214,7 +1438,7 @@
         </ul>
     </div>
 
-    <!-- Slide 12: Let's Talk -->
+     <!-- Slide 12: Let's Talk -->
     <div class="slide" id="slide-12">
         <div class="slide-number">11</div>
         <h2 class="slide-title" style="text-align: center;">Let's Talk</h2>
@@ -1251,23 +1475,40 @@
         <button class="nav-btn" id="nextBtn" title="Next Slide">
             <i class="material-icons">arrow_back</i>
         </button>
+        <button class="print-btn" onclick="window.print()" title="Print / Save as PDF">
+            <i class="material-icons">print</i>
+            <span>طباعة / PDF</span>
+        </button>
     </div>
 </div>
 
 <!-- Service Profile Modal -->
 <div class="modal-overlay" id="serviceModal">
     <div class="modal-container">
-        <button class="modal-close" onclick="closeServiceModal()">
-            <i class="material-icons">close</i>
-        </button>
-        
-        <div class="modal-tabs">
-            <div class="modal-tab active" onclick="switchModalTab('ar')">العربية</div>
-            <div class="modal-tab" onclick="switchModalTab('en')">English</div>
+        <div class="modal-header">
+            <div class="modal-title-large">
+                <i class="material-icons" id="modalIcon">business_center</i>
+                <span id="modalTitleText">Service Profile</span>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-print" type="button" onclick="printServiceProfile()" title="طباعة Service Profile">
+                    <i class="material-icons">print</i>
+                </button>
+                <button class="modal-close" type="button" onclick="closeServiceModal()">
+                    <i class="material-icons">close</i>
+                </button>
+            </div>
         </div>
         
-        <div id="modalContent">
-            <!-- Content will be loaded dynamically -->
+        <div class="modal-body">
+            <div class="modal-tabs">
+                <div class="modal-tab active" onclick="switchModalTab('ar')">العربية</div>
+                <div class="modal-tab" onclick="switchModalTab('en')">English</div>
+            </div>
+            
+            <div id="modalContent">
+                <!-- Content will be loaded dynamically -->
+            </div>
         </div>
     </div>
 </div>
@@ -1367,8 +1608,27 @@
     function openServiceModal(service) {
         currentService = service;
         const modal = document.getElementById('serviceModal');
+        const modalTitle = document.getElementById('modalTitleText');
+        const modalIcon = document.getElementById('modalIcon');
         const isEnglish = document.body.classList.contains('en-version');
         currentModalLang = isEnglish ? 'en' : 'ar';
+        
+        // Set Icon based on service
+        const icons = {
+            'ecommerce': 'shopping_cart',
+            'hotels': 'hotel',
+            'education': 'school',
+            'travel': 'flight',
+            'restaurants': 'restaurant',
+            'finance': 'account_balance',
+            'pharmacy': 'medical_services',
+            'realestate': 'home',
+            'cleaning': 'cleaning_services'
+        };
+        
+        if (icons[service]) {
+            modalIcon.textContent = icons[service];
+        }
         
         // Update active tab
         const tabs = document.querySelectorAll('.modal-tab');
@@ -1399,281 +1659,419 @@
 
     function loadServiceContent(service, lang) {
         const modalContent = document.getElementById('modalContent');
+        const modalTitle = document.getElementById('modalTitleText');
         
         // Service data objects
         const services = {
             ecommerce: {
-                ar: {
-                    title: 'التجارة الإلكترونية',
-                    about: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لشركات التجارة الإلكترونية تركز على إدارة تجربة العميل قبل الشراء وبعده (من اول الاستفسار مرورا بعملية الشراء ومتابعة العميل و خدمات ما بعد البيع). نعمل كامتداد مباشر لعلامتك التجارية، مع فرق مدربة على المنتجات، السياسات، ونبرة التواصل الخاصة بكل متجر، مع قابلية عالية للتوسع في مواسم الذروة.`,
-                    benefits: `نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي) عن طريق نظام الاتصال السحابي الخاص بنا ذو الجودة العالية مع كل المميزات. نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت و جميع الأدوات اللازمة لتوفير بيئة عمل مثالية لفرق خدمة العملاء مجانا. نغني عملاؤنا عن تكلفة التشغيل و تكلفة التدريب و التوظيف. نقدم تقارير للاداء و اراء العميل النهائي و تسجيل المكالمات بشكل شهري. نوفر مدير حساب خاص بك و مشرف فريق خدمة العملاء و مراقب جودة لضمان أعلى مستوى خدمة.`,
-                    industry: `المتاجر الإلكترونية.`,
-                    challenges: `تأخر الرد يؤدي إلى فقدان المبيعات قبل الشراء. تتبع الشحنات والاسترجاع. سلات متروكة وشكاوى التأخير. طلبات وهمية كثيرة، خصوصاً في حالات الدفع عند الاستلام. عملاء سابقون لا يعودون للشراء مرة أخرى. ضغط شديد في المواسم والعروض (White Friday / رمضان). ردود غير موحدة تؤثر على صورة البراند. تقييمات سلبية على منصات التواصل بسبب تجربة دعم سيئة.`,
-                    solution: `فريق دعم 24/7 للرد على استفسارات وحل شكاوى العملاء. أتمتة الردود الشائعة. فريق دعم متعدد القنوات (Omnichannel) يدمج الاتصال المباشر، WhatsApp، وسائل التواصل الاجتماعي. تأكيد جميع الطلبات يوميًا ، مما يضمن سير عمل سلس لمتجرك. متابعة استرداد السلات المتروكة يوميًا، لتحويل الاهتمام الضائع إلى إيرادات حقيقية. جمع آراء جميع عملائك يوميًا، لتعزيز فهمك لرضا العملاء وتحسين خدماتك. متابعة يومية للمشاكل التي يواجهها عملائك و السعي لحلها في إطار سياسة العمل. إعادة التواصل مع العملاء الغير نشيطين و استرجاعها.`,
-                    roi: `زيادة معدل التحويل. خفض زمن الاستجابة. رفع CSAT و NPS و زيادة ولاء العملاء. قطع تكاليف شحن الطلبات الوهمية . جمع التقييمات و اراء العملاء لتحسين أخذ قرارات تطوير العمل . زيادة ولاء العملاء وتحسين تجربة الشراء و بناء علاقة طويلة الأجل. زيادة التعليقات الايجابية وتحسين سمعة المتجر. استقرار الأداء في مواسم الذروة.`
+                title: { ar: 'التجارة الإلكترونية', en: 'E-commerce' },
+                icon: 'shopping_cart',
+                about: { 
+                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لشركات التجارة الإلكترونية تركز على إدارة تجربة العميل قبل الشراء وبعده. نعمل كامتداد مباشر لعلامتك التجارية، مع فرق مدربة.`,
+                    en: `We offer integrated BPO and cloud communication solutions tailored for e-commerce companies, focusing on managing customer experience before and after purchase. We act as a direct extension of your brand, with trained teams.`
                 },
-                en: {
-                    title: 'E-commerce',
-                    about: `We offer integrated BPO and cloud communication solutions tailored for e-commerce companies, focusing on managing the customer experience before and after purchase (from initial inquiry through the purchasing process, customer follow-up, and post-sales services). We act as a direct extension of your brand, with teams trained on your products, policies, and communication tone specific to each store, with high scalability during peak seasons.`,
-                    benefits: `We provide multi-channel customer support (phone, WhatsApp, email, social media) through our high-quality cloud communication system with all features. We provide modern offices, equipment, stable high-speed internet, and all necessary tools to create an ideal work environment for customer service teams at no cost. We save our clients from operating costs, training costs, and hiring costs. We provide monthly performance reports, final customer opinions, and call recordings. We provide a dedicated account manager, customer service team supervisor, and quality monitor to ensure the highest level of service.`,
-                    industry: `E-commerce stores.`,
-                    challenges: `Delayed response leads to lost sales before purchase. Tracking shipments and returns. Abandoned carts and delay complaints. Many fake orders, especially in cash-on-delivery cases. Previous customers not returning to buy again. Severe pressure during seasons and promotions (White Friday / Ramadan). Inconsistent responses affecting brand image. Negative ratings on social platforms due to poor support experience.`,
-                    solution: `24/7 support team to respond to inquiries and resolve customer complaints. Automation of common responses. Multi-channel support team (Omnichannel) integrating direct calls, WhatsApp, and social media. Confirming all orders daily, ensuring smooth workflow for your store. Daily follow-up on abandoned carts to convert lost interest into actual revenue. Collecting opinions from all your customers daily to enhance your understanding of customer satisfaction and improve services. Daily follow-up on problems faced by your customers and striving to solve them within the work policy. Reconnecting with inactive customers and retrieving them.`,
-                    roi: `Increase conversion rate. Reduce response time. Improve CSAT and NPS and increase customer loyalty. Cut shipping costs for fake orders. Collect ratings and customer opinions to improve business development decisions. Increase customer loyalty and improve the shopping experience and build long-term relationships. Increase positive comments and improve store reputation. Stable performance during peak seasons.`
-                }
+                benefits: {
+                    ar: `نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي) عن طريق نظام الاتصال السحابي الخاص بنا. نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت.`,
+                    en: `We provide multi-channel customer support (phone, WhatsApp, email, social media) through our cloud communication system. We provide modern offices, equipment, and stable high-speed internet.`
+                },
+                industry: { ar: 'المتاجر الإلكترونية', en: 'E-commerce stores' },
+                challenges: [
+                    { ar: 'تأخر الرد يؤدي إلى فقدان المبيعات قبل الشراء', en: 'Delayed response leads to lost sales before purchase' },
+                    { ar: 'تتبع الشحنات والاسترجاع', en: 'Tracking shipments and returns' },
+                    { ar: 'سلات متروكة وشكاوى التأخير', en: 'Abandoned carts and delay complaints' },
+                    { ar: 'طلبات وهمية كثيرة', en: 'Many fake orders (COD)' },
+                    { ar: 'ضغط شديد في المواسم والعروض', en: 'Severe pressure during seasons and promotions' },
+                    { ar: 'تقييمات سلبية على منصات التواصل', en: 'Negative ratings on social platforms' }
+                ],
+                solution: [
+                    { ar: 'فريق دعم 24/7 للرد على استفسارات وحل شكاوى العملاء', en: '24/7 support team to respond to inquiries and resolve complaints' },
+                    { ar: 'أتمتة الردود الشائعة', en: 'Automation of common responses' },
+                    { ar: 'تأكيد جميع الطلبات يوميًا', en: 'Confirming all orders daily' },
+                    { ar: 'متابعة استرداد السلات المتروكة يوميًا', en: 'Daily follow-up on abandoned carts' },
+                    { ar: 'جمع آراء جميع عملائك يوميًا', en: 'Collecting opinions from all your customers daily' }
+                ],
+                roi: [
+                    { ar: 'زيادة معدل التحويل', en: 'Increase conversion rate' },
+                    { ar: 'خفض زمن الاستجابة', en: 'Reduce response time' },
+                    { ar: 'رفع CSAT و NPS', en: 'Raise CSAT and NPS' },
+                    { ar: 'قطع تكاليف شحن الطلبات الوهمية', en: 'Cut shipping costs for fake orders' },
+                    { ar: 'استقرار الأداء في مواسم الذروة', en: 'Stable performance during peak seasons' }
+                ]
             },
             hotels: {
-                ar: {
-                    title: 'الفنادق والضيافة',
-                    about: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة للفنادق تركز على إدارة تواصل النزلاء، الحجوزات، المتابعة التشغيلية، والدعم الخدمي، مع تمثيل احترافي لعلامة الفندق أمام العميل. فرقنا مدرّبة على التعامل مع قرارات الحجز، إدارة الشكاوى، وزيادة قيمة الحجز دون التأثير على تجربة النزيل.`,
-                    benefits: `نعمل كامتداد مباشر لعلامتك التجارية، مع فرق مدربة على الخدمات، السياسات، ونبرة التواصل الخاصة بالفندق، مع قابلية عالية للتوسع في مواسم الذروة. نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي) عن طريق نظام الاتصال السحابي الخاص بنا ذو الجودة العالية مع كل المميزات. نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت و جميع الأدوات اللازمة لتوفير بيئة عمل مثالية لفرق خدمة العملاء مجانا. نغني عملاؤنا عن تكلفة التشغيل و تكلفة التدريب و التوظيف. نقدم تقارير للاداء و اراء العميل النهائي و تسجيل المكالمات بشكل شهري. نوفر مدير حساب خاص بك و مشرف فريق خدمة العملاء و مراقب جودة لضمان أعلى مستوى خدمة.`,
-                    industryOverview: `حجم السوق: كبير، ويشمل الفنادق، المنتجعات، والشقق الفندقية بمختلف الفئات. اتجاه النمو: في نمو مستمر، مدفوع بزيادة حركة السياحة الترفيهية والسياحة الدينية ، الاعتماد المتزايد على الحجز الإلكتروني، وارتفاع توقعات العملاء من حيث سرعة الاستجابة وتجربة الحجز. حدة المنافسة: مرتفعة، نتيجة كثرة الخيارات المتاحة أمام العميل وسهولة المقارنة بين الفنادق محليًا وعالميًا عبر منصات الحجز. طبيعة السوق: مجزّأ، يضم عددًا كبيرًا من الفنادق المستقلة إلى جانب سلاسل فندقية كبيرة، مع اختلاف واضح في مستوى التشغيل وإدارة تجربة النزيل.`,
-                    challenges: `طول وتعقيد قرار الحجز. فقدان الحجوزات بسبب ضعف المتابعة بعد الاستفسار. عدم وضوح خطوات التأكيد والدفع. ضعف استغلال فرص زيادة الإيراد من الحجوزات. تأخر أو سوء إدارة الشكاوى. غياب نظام منظم لجمع وتحليل ملاحظات واراء النزلاء.`,
-                    solution: `فريق دعم 24/7 للرد على استفسارات وحل شكاوى العملاء. فرق متخصصة لإدارة الحجوزات. متابعة منظمة لقرار الحجز حتى الإتمام. تأكيد الحجوزات وإدارة الدفع عبر البريد الإلكتروني وروابط الدفع. تنفيذ Upselling مدروس (ترقيات، خدمات إضافية). استقبال الشكاوى وحلها في إطار سياسة الفندق و تأكد من رضا العميل. إجراء مكالمات متابعة بعد الإقامة لجمع Feedback.`,
-                    roi: `زيادة نسبة تحويل الاستفسارات إلى حجوزات فعلية. تقليل فقدان الحجوزات الناتج عن التردد أو ضعف التواصل. رفع متوسط قيمة الحجز. تحسين تجربة النزيل وسمعة الفندق. تقليل الضغط التشغيلي على فرق الاستقبال الداخلية. توفير رؤية أوضح للإدارة حول تجربة النزلاء من استطلاعات الآراء لتحسين أخذ قرارات تطوير العمل.`
+                title: { ar: 'الفنادق والضيافة', en: 'Hotels & Hospitality' },
+                icon: 'hotel',
+                about: { 
+                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة للفنادق تركز على إدارة تواصل النزلاء والحجوزات.`,
+                    en: `We offer integrated BPO and cloud communication solutions tailored for hotels, focusing on managing guest communication and reservations.`
                 },
-                en: {
-                    title: 'Hotels & Hospitality',
-                    about: `We offer integrated BPO and cloud communication solutions tailored for hotels, focusing on managing guest communication, reservations, operational follow-up, and service support, with professional representation of the hotel brand to the customer. Our teams are trained to handle booking decisions, manage complaints, and increase booking value without affecting the guest experience.`,
-                    benefits: `We work as a direct extension of your brand, with teams trained on services, policies, and communication tone specific to the hotel, with high scalability during peak seasons. We provide multi-channel customer support (phone, WhatsApp, email, social media) through our high-quality cloud communication system with all features. We provide modern offices, equipment, stable high-speed internet, and all necessary tools to create an ideal work environment for customer service teams at no cost. We save our clients from operating costs, training costs, and hiring costs. We provide monthly performance reports, final customer opinions, and call recordings. We provide a dedicated account manager, customer service team supervisor, and quality monitor to ensure the highest level of service.`,
-                    industryOverview: `Market Size: Large, including hotels, resorts, and hotel apartments of various categories. Growth Trend: Continuously growing, driven by increased recreational and religious tourism movement, increasing reliance on electronic booking, and rising customer expectations regarding response speed and booking experience. Competition Level: High, due to the many options available to the customer and ease of comparison between hotels locally and globally through booking platforms. Market Nature: Fragmented, including a large number of independent hotels alongside large hotel chains, with clear differences in operation level and guest experience management.`,
-                    challenges: `Length and complexity of booking decision. Loss of reservations due to poor follow-up after inquiry. Lack of clarity in confirmation and payment steps. Poor exploitation of opportunities to increase revenue from reservations. Delay or poor management of complaints. Absence of an organized system for collecting and analyzing guest feedback and opinions.`,
-                    solution: `24/7 support team to respond to inquiries and resolve customer complaints. Specialized teams for reservation management. Organized follow-up on booking decision until completion. Confirming reservations and managing payment via email and payment links. Executing thoughtful upselling (upgrades, additional services). Receiving complaints and resolving them within the hotel policy and ensuring customer satisfaction. Conducting follow-up calls after stay to collect feedback.`,
-                    roi: `Increase the conversion rate of inquiries to actual reservations. Reduce loss of reservations resulting from hesitation or poor communication. Raise average booking value. Improve guest experience and hotel reputation. Reduce operational pressure on internal reception teams. Provide clearer vision for management about guest experience from opinion surveys to improve business development decisions.`
-                }
+                benefits: {
+                    ar: `نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي). نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت.`,
+                    en: `We provide multi-channel customer support (phone, WhatsApp, email, social media). We provide modern offices, equipment, and stable high-speed internet.`
+                },
+                industryOverview: {
+                    ar: `حجم السوق: كبير، ويشمل الفنادق، المنتجعات، والشقق الفندقية. حدة المنافسة: مرتفعة.`,
+                    en: `Market Size: Large, includes hotels, resorts, and hotel apartments. Competition Level: High.`
+                },
+                challenges: [
+                    { ar: 'طول وتعقيد قرار الحجز', en: 'Length and complexity of booking decision' },
+                    { ar: 'فقدان الحجوزات بسبب ضعف المتابعة', en: 'Loss of reservations due to poor follow-up' },
+                    { ar: 'ضعف استغلال فرص زيادة الإيراد', en: 'Poor exploitation of opportunities to increase revenue' },
+                    { ar: 'تأخر أو سوء إدارة الشكاوى', en: 'Delay or poor management of complaints' },
+                    { ar: 'غياب نظام منظم لجمع وتحليل الملاحظات', en: 'Absence of an organized system for collecting feedback' }
+                ],
+                solution: [
+                    { ar: 'فرق متخصصة لإدارة الحجوزات', en: 'Specialized teams for reservation management' },
+                    { ar: 'تنفيذ Upselling مدروس (ترقيات، خدمات إضافية)', en: 'Executing thoughtful upselling (upgrades, additional services)' },
+                    { ar: 'استقبال الشكاوى وحلها في إطار سياسة الفندق', en: 'Receiving complaints and resolving them within hotel policy' },
+                    { ar: 'إجراء مكالمات متابعة بعد الإقامة', en: 'Conducting follow-up calls after stay' }
+                ],
+                roi: [
+                    { ar: 'زيادة نسبة تحويل الاستفسارات إلى حجوزات', en: 'Increase conversion rate of inquiries to reservations' },
+                    { ar: 'رفع متوسط قيمة الحجز', en: 'Raise average booking value' },
+                    { ar: 'تحسين تجربة النزيل وسمعة الفندق', en: 'Improve guest experience and hotel reputation' }
+                ]
             },
             education: {
-                ar: {
-                    title: 'التعليم والتدريب',
-                    about: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لمراكز الكورسات والمعاهد التدريبية تركز على إدارة تواصل الطلبة، متابعة قرارات التسجيل، والدعم التشغيلي قبل البيع، مع تمثيل احترافي للمركز أمام الطالب. فرقنا مدرّبة على التعامل مع استفسارات المتدربين، شرح البرامج التعليمية بوضوح، وزيادة معدلات التسجيل دون الضغط على الطالب.`,
-                    benefits: `نعمل كامتداد مباشر لعلامتك التجارية، مع فرق مدربة على الخدمات، السياسات، ونبرة التواصل الخاصة بالمعهد، مع قابلية عالية للتوسع في مواسم الذروة. نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي) عن طريق نظام الاتصال السحابي الخاص بنا ذو الجودة العالية مع كل المميزات. نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت و جميع الأدوات اللازمة لتوفير بيئة عمل مثالية لفرق خدمة العملاء مجانا. نغني عملاؤنا عن تكلفة التشغيل و تكلفة التدريب و التوظيف. نقدم تقارير للاداء و اراء العميل النهائي و تسجيل المكالمات بشكل شهري. نوفر مدير حساب خاص بك و مشرف فريق خدمة العملاء و مراقب جودة لضمان أعلى مستوى خدمة.`,
-                    industryOverview: `حجم السوق: كبير ومتنوع، ويشمل مراكز التدريب المهني، المعاهد المتخصصة، الكورسات التقنية، والبرامج التأهيلية لسوق العمل. اتجاه النمو: في نمو مستمر، مدفوع بزيادة الطلب على تطوير المهارات، تغيّر متطلبات سوق العمل. حدة المنافسة: مرتفعة، نتيجة كثرة المراكز وتنوع البدائل. طبيعة السوق: مجزّأ، يضم عددًا كبيرًا من المراكز الصغيرة والمتوسطة إلى جانب كيانات تعليمية أكبر، مع تفاوت واضح في مستوى إدارة تجربة الطالب والمتابعة قبل التسجيل.`,
-                    challenges: `طلب غير ثابت (ذروة ثم هدوء) يؤدي لضياع استفسارات أثناء الضغط. المختص يرد بمعلومات فقط، غير مدرّب على تحويل المهتم للتسجيل. غياب بيانات عن أسباب التردد. قياس الأداء يركز على نشاط (مكالمات/سرعة) وليس على التسجيلات الفعلية. إهمال قاعدة الطلبة السابقين رغم أنها مصدر ربح سهل ومتكرر.`,
-                    solution: `التواصل مع الطلبة المهتمة من حملات التسويق و تقديم جميع المعلومات و إرشادهم للتسجيل و عرض برامج التعليم الأخرى. إدارة متكاملة لجميع قنوات التواصل مع الطلبة تشمل الهاتف، واتساب، السوشيال ميديا، والبريد الإلكتروني. نقود المحادثة من مجرد استفسار إلى قرار تسجيل من خلال متابعة منظمة تراعي رحلة الطالب وتردده. ننفّذ أنشطة Upselling و Cross Selling تتناسب مع احتياجات كل طالب. كما نقوم بإعادة تنشيط الطلبة السابقين بشكل منظّم، مع تجميع وتحليل بيانات الاستفسارات لدعم قرارات الإدارة.`,
-                    roi: `زيادة معدلات تحويل الاستفسارات إلى تسجيلات فعلية. تقليل ضياع الفرص خلال فترات الضغط والذروة. تحسين جودة تجربة الطالب قبل التسجيل. زيادة قيمة متوسط قيمة الطلب على المدى الطويل من خلال إعادة البيع. تخفيف الضغط التشغيلي على فرق المركز الداخلية. توفير رؤية أوضح للإدارة حول أسباب التردد وأداء البرامج.`
+                title: { ar: 'التعليم والتدريب', en: 'Education & Training' },
+                icon: 'school',
+                about: { 
+                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لمراكز الكورسات. نعمل كامتداد مباشر للمركز.`,
+                    en: `We offer integrated BPO and cloud communication solutions tailored for course centers. We act as a direct extension of the center.`
                 },
-                en: {
-                    title: 'Education & Training',
-                    about: `We offer integrated BPO and cloud communication solutions tailored for course centers and training institutes, focusing on managing student communication, following up on registration decisions, and pre-sales operational support, with professional representation of the center to the student. Our teams are trained to handle trainee inquiries, clearly explain educational programs, and increase registration rates without pressuring the student.`,
-                    benefits: `We work as a direct extension of your brand, with teams trained on services, policies, and communication tone specific to the institute, with high scalability during peak seasons. We provide multi-channel customer support (phone, WhatsApp, email, social media) through our high-quality cloud communication system with all features. We provide modern offices, equipment, stable high-speed internet, and all necessary tools to create an ideal work environment for customer service teams at no cost. We save our clients from operating costs, training costs, and hiring costs. We provide monthly performance reports, final customer opinions, and call recordings. We provide a dedicated account manager, customer service team supervisor, and quality monitor to ensure the highest level of service.`,
-                    industryOverview: `Market Size: Large and diverse, including vocational training centers, specialized institutes, technical courses, and labor market qualification programs. Growth Trend: Continuously growing, driven by increased demand for skill development and changing labor market requirements. Competition Level: High, due to the many centers and variety of alternatives. Market Nature: Fragmented, including a large number of small and medium centers alongside larger educational entities, with clear differences in the level of student experience management and pre-registration follow-up.`,
-                    challenges: `Unstable demand (peak then lull) leads to lost inquiries during pressure. The specialist responds with information only, not trained to convert the interested party to registration. Absence of data on reasons for hesitation. Performance measurement focuses on activity (calls/speed) rather than actual registrations. Neglecting the base of previous students despite being an easy and recurring profit source.`,
-                    solution: `Communicating with interested students from marketing campaigns, providing all information, guiding them to registration, and presenting other educational programs. Integrated management of all communication channels with students including phone, WhatsApp, social media, and email. We lead the conversation from just an inquiry to a registration decision through organized follow-up that considers the student journey and hesitation. We execute Upselling and Cross Selling activities that suit each student's needs. We also systematically reactivate previous students, while collecting and analyzing inquiry data to support management decisions.`,
-                    roi: `Increase conversion rates from inquiries to actual registrations. Reduce lost opportunities during pressure and peak periods. Improve the quality of the student experience before registration. Increase the value of average order value in the long term through reselling. Alleviate operational pressure on internal center teams. Provide clearer vision for management about reasons for hesitation and program performance.`
-                }
+                benefits: {
+                    ar: `نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي). نوفر مكاتب وأجهزة حديثة.`,
+                    en: `We provide multi-channel customer support (phone, WhatsApp, email, social media). We provide modern offices and equipment.`
+                },
+                challenges: [
+                    { ar: 'طلب غير ثابت (ذروة ثم هدوء)', en: 'Unstable demand (peak then lull)' },
+                    { ar: 'المختص يرد بمعلومات فقط، غير مدرّب على التحويل', en: 'Specialist responds with info only, not trained on conversion' },
+                    { ar: 'غياب بيانات عن أسباب التردد', en: 'Absence of data on reasons for hesitation' },
+                    { ar: 'قياس الأداء يركز على نشاط (مكالمات/سرعة) وليس على التسجيلات الفعلية', en: 'Performance measurement focuses on activity (calls/speed) rather than actual registrations' },
+                    { ar: 'إهمال قاعدة الطلبة السابقين', en: 'Neglecting the base of previous students' }
+                ],
+                solution: [
+                    { ar: 'التواصل مع الطلبة المهتمة من حملات التسويق', en: 'Communicating with interested students from marketing campaigns' },
+                    { ar: 'إدارة متكاملة لجميع قنوات التواصل', en: 'Integrated management of all communication channels' },
+                    { ar: 'نقود المحادثة من مجرد استفسار إلى قرار تسجيل', en: 'We lead the conversation from just an inquiry to a registration decision' },
+                    { ar: 'ننفّذ أنشطة Upselling و Cross Selling', en: 'We execute Upselling and Cross Selling activities' },
+                    { ar: 'إعادة تنشيط الطلبة السابقين', en: 'Systematically reactivating previous students' }
+                ],
+                roi: [
+                    { ar: 'زيادة معدلات تحويل الاستفسارات', en: 'Increase conversion rates from inquiries' },
+                    { ar: 'تقليل ضياع الفرص', en: 'Reduce lost opportunities during pressure and peak periods' },
+                    { ar: 'تحسين جودة تجربة الطالب', en: 'Improve quality of student experience' },
+                    { ar: 'زيادة القيمة على المدى الطويل', en: 'Increase value over the long term' }
+                ]
             },
             travel: {
-                ar: {
-                    title: 'السفر والطيران',
-                    about: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لمكاتب وشركات السياحة و الطيران تركز على إدارة تواصل العملاء، متابعة قرارات الحجز، والدعم التشغيلي الكامل، مع تمثيل احترافي للشركة أمام العميل. فرقنا مدرّبة على التعامل مع دورة قرار الحجز الطويلة، إدارة التردد والاعتراضات، وزيادة قيمة الحجز دون الضغط على العميل.`,
-                    benefits: `نعمل كامتداد مباشر لعلامتك التجارية، مع فرق مدربة على الخدمات، السياسات، ونبرة التواصل الخاصة بالشركة، مع قابلية عالية للتوسع في مواسم الذروة. نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي) عن طريق نظام الاتصال السحابي الخاص بنا ذو الجودة العالية مع كل المميزات. نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت و جميع الأدوات اللازمة لتوفير بيئة عمل مثالية لفرق خدمة العملاء مجانا. نغني عملاؤنا عن تكلفة التشغيل و تكلفة التدريب و التوظيف. نقدم تقارير للاداء و اراء العميل النهائي و تسجيل المكالمات بشكل شهري. نوفر مدير حساب خاص بك و مشرف فريق خدمة العملاء و مراقب جودة لضمان أعلى مستوى خدمة.`,
-                    industryOverview: `حجم السوق: كبير ومتنوع، ويشمل السياحة الخارجية والداخلية، الرحلات الجماعية، البرامج الخاصة. اتجاه النمو: في نمو مستمر، مدفوع بزيادة الطلب على السفر، تنوع العروض السياحية، وسهولة الوصول للعملاء عبر القنوات الرقمية. حدة المنافسة: مرتفعة جدًا، نتيجة سهولة مقارنة العروض بين الشركات، وحساسية العميل للسعر والتوقيت وجودة المتابعة.`,
-                    challenges: `طول وتعقيد قرار الحجز وتغيّره المستمر. حساسية التوقيت وتأثير سرعة الرد والمتابعة. سهولة انتقال العميل بين شركات السياحة. ارتفاع تكلفة فقدان العميل. ضعف إدارة الاعتراضات والتردد. غياب رؤية واضحة لأسباب فقدان الحجوزات واتجاهات الطلب.`,
-                    solution: `إدارة قرار الحجز من أول استفسار وحتى الإتمام. عرض وترقية البرامج و الرحلات المتاحة بناء على احتياج العميل. متابعة منظمة تحافظ على العميل خلال دورة القرار. ضمان سرعة الاستجابة في التوقيتات الحرجة. التعامل الاحترافي مع الاعتراضات والتردد. تجميع وتحليل بيانات الاستفسارات لتقديم رؤية أوضح للإدارة. إدارة الإلغاءات وطلبات الـ Refund وطلبات التاجيل بشكل منظم وواضح.`,
-                    roi: `زيادة نسبة تحويل الاستفسارات إلى حجوزات فعلية. تقليل فقدان العملاء بسبب التأخير أو ضعف المتابعة. رفع قيمة الحجز من خلال إدارة أفضل لقرار العميل. تحسين تجربة العميل وتعزيز الثقة في الشركة. توفير بيانات واضحة تدعم تطوير العروض واتخاذ قرارات أدق.`
+                title: { ar: 'السفر والطيران', en: 'Travel & Aviation' },
+                icon: 'flight',
+                about: { 
+                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لمكاتب وشركات السياحة.`,
+                    en: `We offer integrated BPO and cloud communication solutions tailored for travel offices and companies.`
                 },
-                en: {
-                    title: 'Travel & Aviation',
-                    about: `We offer integrated BPO and cloud communication solutions tailored for travel and aviation offices and companies, focusing on managing customer communication, following up on booking decisions, and complete operational support, with professional representation of the company to the customer. Our teams are trained to handle the long booking decision cycle, manage hesitation and objections, and increase booking value without pressuring the customer.`,
-                    benefits: `We work as a direct extension of your brand, with teams trained on services, policies, and communication tone specific to the company, with high scalability during peak seasons. We provide multi-channel customer support (phone, WhatsApp, email, social media) through our high-quality cloud communication system with all features. We provide modern offices, equipment, stable high-speed internet, and all necessary tools to create an ideal work environment for customer service teams at no cost. We save our clients from operating costs, training costs, and hiring costs. We provide monthly performance reports, final customer opinions, and call recordings. We provide a dedicated account manager, customer service team supervisor, and quality monitor to ensure the highest level of service.`,
-                    industryOverview: `Market Size: Large and diverse, including foreign and domestic tourism, group trips, and special programs. Growth Trend: Continuously growing, driven by increased demand for travel, diversity of tourism offers, and ease of reaching customers through digital channels. Competition Level: Very high, due to ease of comparing offers between companies, and customer sensitivity to price, timing, and quality of follow-up.`,
-                    challenges: `Length and complexity of booking decision and its constant change. Timing sensitivity and the impact of response speed and follow-up. Ease of customer movement between tourism companies. High cost of losing customers. Poor management of objections and hesitation. Absence of clear vision for reasons for lost bookings and demand trends.`,
-                    solution: `Managing the booking decision from the first inquiry until completion. Presenting and upgrading available programs and trips based on customer needs. Organized follow-up that maintains the customer throughout the decision cycle. Ensuring response speed during critical times. Professional handling of objections and hesitation. Collecting and analyzing inquiry data to provide clearer vision for management. Managing cancellations, refund requests, and postponement requests in an organized and clear manner.`,
-                    roi: `Increase the conversion rate of inquiries to actual bookings. Reduce customer loss due to delay or poor follow-up. Raise booking value through better management of customer decision. Improve customer experience and enhance trust in the company. Provide clear data that support offer development and more accurate decision-making.`
-                }
+                benefits: {
+                    ar: `نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي). نوفر مكاتب وأجهزة حديثة.`,
+                    en: `We provide multi-channel customer support (phone, WhatsApp, email, social media). We provide modern offices and equipment.`
+                },
+                challenges: [
+                    { ar: 'طول وتعقيد قرار الحجز', en: 'Length and complexity of booking decision' },
+                    { ar: 'حساسية التوقيت وتأثير سرعة الرد', en: 'Timing sensitivity and impact of response speed' },
+                    { ar: 'سهولة انتقال العميل', en: 'Ease of customer movement' },
+                    { ar: 'غياب رؤية واضحة', en: 'Absence of clear vision' }
+                ],
+                solution: [
+                    { ar: 'إدارة قرار الحجز', en: 'Managing booking decision' },
+                    { ar: 'عرض وترقية البرامج', en: 'Presenting and upgrading programs' },
+                    { ar: 'متابعة منظمة', en: 'Organized follow-up' },
+                    { ar: 'إدارة الإلغاءات', en: 'Managing cancellations' }
+                ],
+                roi: [
+                    { ar: 'زيادة نسبة تحويل الاستفسارات', en: 'Increase conversion rate of inquiries' },
+                    { ar: 'تقليل فقدان العملاء', en: 'Reduce customer loss' },
+                    { ar: 'رفع قيمة الحجز', en: 'Raise booking value' }
+                ]
             },
             restaurants: {
-                ar: {
-                    title: 'المطاعم والمطابخ',
-                    about: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة للمطاعم تركز على إدارة الطلبات، تواصل العملاء، والمتابعة التشغيلية عبر جميع القنوات. نعمل كامتداد تشغيلي للمطعم في التعامل مع العملاء، إدارة الطلبات والحجوزات، وحل المشكلات الفورية، مع الحفاظ على تجربة عميل مستقرة وزيادة قيمة كل طلب دون التأثير على سير العمل داخل الفروع.`,
-                    benefits: `نعمل كامتداد مباشر لعلامتك التجارية، مع فرق مدربة على الأصناف، السياسات، ونبرة التواصل الخاصة بالمطعم، مع قابلية عالية للتوسع في مواسم الذروة. نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، تواصل اجتماعي) عن طريق نظام الاتصال السحابي الخاص بنا ذو الجودة العالية مع كل المميزات. نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت و جميع الأدوات اللازمة لتوفير بيئة عمل مثالية لفرق خدمة العملاء مجانا. نغني عملاؤنا عن تكلفة التشغيل و تكلفة التدريب و التوظيف. نقدم تقارير للاداء و اراء العميل النهائي و تسجيل المكالمات بشكل شهري. نوفر مدير حساب خاص بك و مشرف فريق خدمة العملاء و مراقب جودة لضمان أعلى مستوى خدمة.`,
-                    industryOverview: `حجم السوق: كبير، ويشمل المطاعم الفردية، وسلاسل المطاعم. اتجاه النمو: في نمو مستمر، مدفوع بازدهار خدمات التوصيل، والاعتماد المتزايد على المنصات الرقمية والتكنولوجيا في الطلب والدفع. حدة المنافسة: مرتفعة جدًا، نتيجة كثرة البدائل وسهولة انتقال العميل بين المطاعم عبر منصات التوصيل.`,
-                    challenges: `منصات التوصيل مثل HungerStation وكيتا تحتفظ ببيانات العملاء لفترات محدودة، ولا توفّر للمطاعم سجل بيانات العملاء وتفضيلات العملاء، مما يحد من فرص إعادة التواصل والبيع المتكرر. تركّز معظم المطاعم على جذب طلبات جديدة دون وجود نظام منظّم لإعادة استهداف العملاء السابقين. يتم التعامل مع الطلبات بشكل تنفيذي فقط، دون استغلال فرص زيادة قيمة الطلب عبر اقتراح إضافات مناسبة أثناء التواصل. التأخر في الرد و فترات انتظار طويلة مما يزيد احتمالية فقدان العميل. VIP Note: وفي حالات تلف الطلب بسبب التوصيل أو أخطاء التسليم من ناحية hugerstation مثلا ، يتحمّل العميل التكلفة دون وضوح فوري لمصدر الخطأ، فيتحمل المطعم التكلفة دون علمه`,
-                    solution: `نوفر فرقًا متخصصة لإدارة الطلبات والتواصل مع العملاء عبر الهاتف، واتساب، وقنوات التواصل المختلفة. نقوم بتجميع وحفظ بيانات العملاء الناتجة عن أي طلب من تطبيقات التوصيل، مع تسجيل سجل الطلبات والتفضيلات. ندير الحوار مع العميل بطريقة مدروسة تسمح باقتراح إضافات مناسبة في التوقيت الصحيح. نتولى إدارة حجوزات الطاولات و العزائم والتأكيدات وتقليل حالات الإلغاء. نراقب الطلبات لحظة بلحظة ونتدخل فور ظهور أي مشكلة لتحديد مصدر الخطأ بدقة سواء من المطعم او التوصيل والتواصل مع مدير الحساب عن طريق ايميل احترافي`,
-                    roi: `زيادة الطلبات المتكررة من خلال استغلال قاعدة العملاء الحالية. رفع متوسط قيمة الطلب عبر Upselling فعّال ومدروس. تقليل فقدان العملاء الناتج عن مشكلات الطلب أو سوء التجربة او تاخر الرد. تحسين سمعة المطعم وزيادة رضا العملاء و بناء علاقة طويلة الأجل. توفير رؤية أوضح لإدارة المطعم حول أداء الطلبات وتجربة العملاء.`
+                title: { ar: 'المطاعم والمطابخ', en: 'Restaurants & Kitchens' },
+                icon: 'restaurant',
+                about: { 
+                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة للمطاعم.`,
+                    en: `We offer integrated BPO and cloud communication solutions tailored for restaurants.`
                 },
-                en: {
-                    title: 'Restaurants & Kitchens',
-                    about: `We offer integrated BPO and cloud communication solutions tailored for restaurants, focusing on order management, customer communication, and operational follow-up across all channels. We act as an operational extension of the restaurant in dealing with customers, managing orders and reservations, and solving immediate problems, while maintaining a stable customer experience and increasing the value of each order without affecting the workflow inside branches.`,
-                    benefits: `We work as a direct extension of your brand, with teams trained on items, policies, and communication tone specific to the restaurant, with high scalability during peak seasons. We provide multi-channel customer support (phone, WhatsApp, social media) through our high-quality cloud communication system with all features. We provide modern offices, equipment, stable high-speed internet, and all necessary tools to create an ideal work environment for customer service teams at no cost. We save our clients from operating costs, training costs, and hiring costs. We provide monthly performance reports, final customer opinions, and call recordings. We provide a dedicated account manager, customer service team supervisor, and quality monitor to ensure the highest level of service.`,
-                    industryOverview: `Market Size: Large, including individual restaurants and restaurant chains. Growth Trend: Continuously growing, driven by the prosperity of delivery services and increasing reliance on digital platforms and technology for ordering and payment. Competition Level: Very high, due to the many alternatives and ease of customer movement between restaurants through delivery platforms.`,
-                    challenges: `Delivery platforms like HungerStation and Talabat retain customer data for limited periods and do not provide restaurants with customer records and preferences, limiting opportunities for reconnection and repeat sales. Most restaurants focus on attracting new orders without an organized system to retarget previous customers. Orders are handled only executionally, without exploiting opportunities to increase order value by suggesting appropriate additions during communication. Delayed response and long waiting periods increase the likelihood of losing customers. VIP Note: In cases of order damage due to delivery or delivery errors from HungerStation for example, the customer bears the cost without immediate clarity on the source of error, so the restaurant bears the cost unknowingly.`,
-                    solution: `We provide specialized teams to manage orders and communicate with customers via phone, WhatsApp, and various communication channels. We collect and save customer data resulting from any order from delivery applications, with a record of orders and preferences. We manage the dialogue with the customer in a studied way that allows suggesting appropriate additions at the right time. We manage table reservations and banquets, confirmations, and reducing cancellation cases. We monitor orders moment by moment and intervene immediately upon any problem to accurately determine the source of error, whether from the restaurant or delivery, and communicate with the account manager via professional email.`,
-                    roi: `Increase repeat orders by exploiting the current customer base. Raise average order value through effective and studied upselling. Reduce customer loss resulting from order problems, poor experience, or delayed response. Improve restaurant reputation, increase customer satisfaction, and build long-term relationships. Provide clearer vision for restaurant management about order performance and customer experience.`
-                }
+                benefits: {
+                    ar: `نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، تواصل اجتماعي). نوفر مكاتب وأجهزة حديثة.`,
+                    en: `We provide multi-channel customer support (phone, WhatsApp, social media). We provide modern offices and equipment.`
+                },
+                challenges: [
+                    { ar: 'منصات التوصيل', en: 'Delivery platforms' },
+                    { ar: 'تركّز على جذب طلبات جديدة', en: 'Focus only on attracting new orders' },
+                    { ar: 'التأخر في الرد', en: 'Delayed response' },
+                    { ar: 'حالات تلف الطلب', en: 'Order damage cases' }
+                ],
+                solution: [
+                    { ar: 'نوفر فرقًا متخصصة', en: 'We provide specialized teams' },
+                    { ar: 'تجميع وحفظ بيانات العملاء', en: 'Collecting and saving customer data' },
+                    { ar: 'إدارة الحوار', en: 'Managing the dialogue' },
+                    { ar: 'متابعة لحظة بلحظة', en: 'Monitoring moment by moment' }
+                ],
+                roi: [
+                    { ar: 'زيادة الطلبات المتكررة', en: 'Increase repeat orders' },
+                    { ar: 'رفع متوسط قيمة الطلب', en: 'Raise average order value' },
+                    { ar: 'تحسين سمعة المطعم', en: 'Improve restaurant reputation' }
+                ]
             },
             finance: {
-                ar: {
-                    title: 'الخدمات المالية والاستثمار',
-                    about: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لشركات التمويل والاستثمار تركز على إدارة استفسارات العملاء، المتابعة التشغيلية، والدعم غير الاستشاري مع التزام كامل بالامتثال والحوكمة وحماية البيانات. فرقنا مدربة على التعامل مع منتجات مالية حساسة.`,
-                    benefits: `نعمل كامتداد مباشر لعلامتك التجارية، مع فرق مدربة على الخدمات، السياسات، ونبرة التواصل الخاصة بالمطعم، مع قابلية عالية للتوسع في مواسم الذروة. نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي) عن طريق نظام الاتصال السحابي الخاص بنا ذو الجودة العالية مع كل المميزات. نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت و جميع الأدوات اللازمة لتوفير بيئة عمل مثالية لفرق خدمة العملاء مجانا. نغني عملاؤنا عن تكلفة التشغيل و تكلفة التدريب و التوظيف. نقدم تقارير للاداء و اراء العميل النهائي و تسجيل المكالمات بشكل شهري. نوفر مدير حساب خاص بك و مشرف فريق خدمة العملاء و مراقب جودة لضمان أعلى مستوى خدمة.`,
-                    industry: `شركات تمويل المشاريع الصغيرة غير المصرفي. شركات الوساطة المالية والتقسيط.`,
-                    challenges: `كثرة الاستفسارات التنظيمية. ارتفاع تكلفة توظيف وتدريب فريق خدمة عملاء داخلية. كثرة الاستفسار حول المنتجات المتوفرة. كثرة الاستفسار عن الأوراق المطلوب توافرها. عدم متابعة تحصيلات العملاء بشكل فعال.`,
-                    solution: `فرق مدربة على الامتثال المالي وعدم تقديم استشارات. سياسات أمان صارمة. تسجيل ومراقبة الجودة والمكالمات. تصعيد ذكي للحالات الحساسة فقط. الرد الفوري على الاستفسارات و تقديم كافة المعلومات. تسجيل مواعيد الزيارة و الاستشارات. فرق متابعة تحصيلات العملاء مدربة على التعامل مع العملاء المتعثرين بدون تصادم.`,
-                    roi: `زيادة قاعدة العملاء وجذب عملاء جدد. تحسين الصورة الذهنية والسمعة المؤسسية. رفع الإنتاجية وتحسين كفاءة العمليات و تقليل الضغط على الفرق الداخلية. الاستغناء عن تكاليف التوظيف، التدريب، التجهيزات، الأنظمة، والمكاتب. ضمان جودة جميع المعاملات عن طريق الموظفين الخارجيين. تقليل غموض الإجراءات للعملاء المتعاملين في هذا المجال لأول مرة. زيادة معدلات التحصيل واسترجاع الديون وتقليل نسبة فقد التحصيلات.`
+                title: { ar: 'الخدمات المالية والاستثمار', en: 'Financial Services & Investment' },
+                icon: 'account_balance',
+                about: { 
+                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لشركات التمويل.`,
+                    en: `We offer integrated BPO and cloud communication solutions tailored for finance companies.`
                 },
-                en: {
-                    title: 'Financial Services & Investment',
-                    about: `We offer integrated BPO and cloud communication solutions tailored for finance and investment companies, focusing on managing customer inquiries, operational follow-up, and non-advisory support with full commitment to compliance, governance, and data protection. Our teams are trained to handle sensitive financial products.`,
-                    benefits: `We work as a direct extension of your brand, with teams trained on services, policies, and communication tone specific to the company, with high scalability during peak seasons. We provide multi-channel customer support (phone, WhatsApp, email, social media) through our high-quality cloud communication system with all features. We provide modern offices, equipment, stable high-speed internet, and all necessary tools to create an ideal work environment for customer service teams at no cost. We save our clients from operating costs, training costs, and hiring costs. We provide monthly performance reports, final customer opinions, and call recordings. We provide a dedicated account manager, customer service team supervisor, and quality monitor to ensure the highest level of service.`,
-                    industry: `Non-bank small project financing companies. Financial brokerage and installment companies.`,
-                    challenges: `Many regulatory inquiries. High cost of hiring and training an internal customer service team. Many inquiries about available products. Many inquiries about required documents. Ineffective follow-up on customer collections.`,
-                    solution: `Teams trained on financial compliance and not providing consultations. Strict security policies. Recording and monitoring quality and calls. Smart escalation for sensitive cases only. Immediate response to inquiries and providing all information. Scheduling visits and consultations. Customer collection follow-up teams trained to deal with defaulting customers without confrontation.`,
-                    roi: `Increase customer base and attract new customers. Improve mental image and institutional reputation. Increase productivity and improve operational efficiency and reduce pressure on internal teams. Eliminate costs of hiring, training, equipment, systems, and offices. Ensure quality of all transactions through external employees. Reduce ambiguity of procedures for customers dealing in this field for the first time. Increase collection rates and debt recovery and reduce the rate of lost collections.`
-                }
+                benefits: {
+                    ar: `فرق مدربة على الامتثال المالي وعدم تقديم استشارات. سياسات أمان صارمة.`,
+                    en: `Teams trained on financial compliance and not providing consultations. Strict security policies.`
+                },
+                industry: { ar: 'شركات التمويل غير المصرفي', en: 'Non-bank financing and brokerage companies' },
+                challenges: [
+                    { ar: 'كثرة الاستفسارات التنظيمية', en: 'Many regulatory inquiries' },
+                    { ar: 'ارتفاع تكلفة توظيف', en: 'High cost of hiring' },
+                    { ar: 'عدم متابعة تحصيلات', en: 'Ineffective follow-up on collections' }
+                ],
+                solution: [
+                    { ar: 'فرق مدربة على الامتثال المالي', en: 'Teams trained on financial compliance' },
+                    { ar: 'تسجيل ومراقبة الجودة', en: 'Recording and monitoring quality' },
+                    { ar: 'الرد الفوري', en: 'Immediate response' },
+                    { ar: 'فرق متابعة تحصيلات', en: 'Collection follow-up teams' }
+                ],
+                roi: [
+                    { ar: 'زيادة قاعدة العملاء', en: 'Increase customer base' },
+                    { ar: 'تحسين الصورة الذهنية', en: 'Improve mental image' },
+                    { ar: 'رفع الإنتاجية', en: 'Increase productivity' },
+                    { ar: 'تقليل غموض الإجراءات', en: 'Reduce ambiguity of procedures' }
+                ]
             },
             pharmacy: {
-                ar: {
-                    title: 'الصيدليات والرعاية الصحية',
-                    about: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة للصيدليات تركز على إدارة تجربة العميل بالكامل، مع الفصل التام بين الدعم الإداري والخدمة الطبية. نعمل كواجهة احترافية للصيدليات بما يحسن السمعة ويزيد القدرة التشغيلية دون أي مخاطر طبية أو قانونية.`,
-                    benefits: `نعمل كامتداد مباشر لعلامتك التجارية، مع فرق مدربة على الأصناف، الخدمات، السياسات، ونبرة التواصل الخاصة بالصيدلية، مع قابلية عالية للتوسع حسب متطلبات العمل. نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي) عن طريق نظام الاتصال السحابي الخاص بنا ذو الجودة العالية مع كل المميزات. نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت و جميع الأدوات اللازمة لتوفير بيئة عمل مثالية لفرق خدمة العملاء مجانا. نغني عملاؤنا عن تكلفة التشغيل و تكلفة التدريب و التوظيف. نقدم تقارير للاداء و اراء العميل النهائي و تسجيل المكالمات بشكل شهري. نوفر مدير حساب خاص بك و مشرف فريق خدمة العملاء و مراقب جودة لضمان أعلى مستوى خدمة.`,
-                    industry: `سلاسل الصيدليات. الصيدليات المستقلة.`,
-                    challenges: `ضغط مكالمات العملاء من استفسارات و طلبات. عدم وجود مختصين للرد علي استفسارات العملاء. ضغط مكالمات واستفسارات مستمرة (أسعار - توافر - بدائل - عروض - تأمين). فقدان فرص Cross-Selling و Up-Selling في المنتجات الغير طبية. فقدان الولاء بسهولة. العميل لا يرتبط بالصيدلية. ينتقل لأقرب بديل أسرع ردًا. تجربة عميل غير مستقرة. رد أحيانًا… أحيانًا لا. اختلاف أسلوب التعامل بين الفروع. لا يوجد معيار ثابت للخدمة. تكلفة تشغيل مرتفعة (توظيف - تدريب - دوران موظفين- صعوبة التوسع).`,
-                    solution: `مركز اتصال مخصص باسم الصيدلية. دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي). الرد على استفسارات (أسعار، فروع، بدائل لنفس المادة الفعالة ). التحقق من توافر الأدوية و اقتراح بدائل لنفس المادة الفعالة (حسب سياسة الصيدلية). تأكيد و التذكير بمواعيد المتابعات. توفير أطباء معتمدين متخصصين للاستشارات الطبيه. دعم حملات التسويق وتحويل الاستفسارات إلى طلبات فعلية. مكالمات بيعيه و عروض على المنتجات الغير طبية.`,
-                    roi: `تجربة عميل أكثر راحة وزيادة رضا العملاء و بناء علاقة طويلة الأجل. تقييمات أفضل على Google ووسائل التواصل و تحسين سمعة العلامة التجارية. تقليل فقدان العملاء بسبب عدم الرد او التاخر. خفض تكاليف التشغيل. صورة احترافية قابلة للتوسع. زيادة مبيعات مستحضرات التجميل و المكملات الغذائية.`
+                title: { ar: 'الصيدليات والرعاية الصحية', en: 'Pharmacies & Healthcare' },
+                icon: 'medical_services',
+                about: { 
+                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة للصيدليات.`,
+                    en: `We offer integrated BPO and cloud communication solutions tailored for pharmacies.`
                 },
-                en: {
-                    title: 'Pharmacies & Healthcare',
-                    about: `We offer integrated BPO and cloud communication solutions tailored for pharmacies, focusing on complete customer experience management, with complete separation between administrative support and medical service. We act as a professional interface for pharmacies, improving reputation and increasing operational capacity without any medical or legal risks.`,
-                    benefits: `We work as a direct extension of your brand, with teams trained on items, services, policies, and communication tone specific to the pharmacy, with high scalability according to work requirements. We provide multi-channel customer support (phone, WhatsApp, email, social media) through our high-quality cloud communication system with all features. We provide modern offices, equipment, stable high-speed internet, and all necessary tools to create an ideal work environment for customer service teams at no cost. We save our clients from operating costs, training costs, and hiring costs. We provide monthly performance reports, final customer opinions, and call recordings. We provide a dedicated account manager, customer service team supervisor, and quality monitor to ensure the highest level of service.`,
-                    industry: `Pharmacy chains. Independent pharmacies.`,
-                    challenges: `High pressure of customer calls from inquiries and requests. Lack of specialists to respond to customer inquiries. Continuous call pressure and inquiries (prices - availability - alternatives - offers - insurance). Lost opportunities for Cross-Selling and Up-Selling in non-medical products. Easy loss of loyalty. The customer is not attached to the pharmacy. Moves to the nearest alternative with faster response. Unstable customer experience. Sometimes responding... sometimes not. Difference in dealing style between branches. No fixed standard for service. High operating costs (hiring - training - employee turnover - difficulty in expansion).`,
-                    solution: `Dedicated call center in the name of the pharmacy. Multi-channel customer support (phone, WhatsApp, email, social media). Responding to inquiries (prices, branches, alternatives for the same active ingredient). Checking drug availability and suggesting alternatives for the same active ingredient (according to pharmacy policy). Confirming and reminding of follow-up appointments. Providing certified specialized doctors for medical consultations. Supporting marketing campaigns and converting inquiries to actual orders. Sales calls and offers on non-medical products.`,
-                    roi: `More comfortable customer experience, increased customer satisfaction, and building long-term relationships. Better ratings on Google and social media and improving brand reputation. Reduce customer loss due to no response or delay. Reduce operating costs. Professional image scalable to growth. Increase sales of cosmetic products and nutritional supplements.`
-                }
+                benefits: {
+                    ar: `مركز اتصال مخصص باسم الصيدلية. دعم عملاء متعدد القنوات.`,
+                    en: `Dedicated call center in the name of the pharmacy. Multi-channel customer support.`
+                },
+                industry: { ar: 'سلاسل الصيدليات والصيدليات المستقلة', en: 'Pharmacy chains and independent pharmacies' },
+                challenges: [
+                    { ar: 'ضغط مكالمات العملاء', en: 'High pressure of customer calls' },
+                    { ar: 'فقدان فرص Cross-Selling', en: 'Lost Cross-Selling opportunities' },
+                    { ar: 'تجربة عميل غير مستقرة', en: 'Unstable customer experience' },
+                    { ar: 'تكلفة تشغيل مرتفعة', en: 'High operating costs' }
+                ],
+                solution: [
+                    { ar: 'الرد على استفسارات', en: 'Responding to inquiries' },
+                    { ar: 'التحقق من توافر الأدوية', en: 'Checking drug availability' },
+                    { ar: 'دعم حملات التسويق', en: 'Supporting marketing campaigns' },
+                    { ar: 'توفير أطباء معتمدين', en: 'Providing certified specialized doctors' }
+                ],
+                roi: [
+                    { ar: 'تجربة عميل أكثر راحة', en: 'More comfortable customer experience' },
+                    { ar: 'تقييمات أفضل', en: 'Better ratings' },
+                    { ar: 'خفض تكاليف التشغيل', en: 'Reduce operating costs' }
+                ]
             },
             realestate: {
-                ar: {
-                    title: 'التطوير والوساطة العقارية',
-                    about: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لشركات التطوير والوساطة العقارية تركز على إدارة العملاء المحتملين (Leads)، سرعة الاستجابة، التأهيل الأولي، والمتابعة التشغيلية.`,
-                    benefits: `نعمل كامتداد مباشر لعلامتك التجارية، مع فرق مدربة على المجال العقاري، السياسات، ونبرة التواصل الخاصة بالشركة، مع قابلية عالية للتوسع في مواسم الذروة. نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، تواصل اجتماعي) عن طريق نظام الاتصال السحابي الخاص بنا ذو الجودة العالية مع كل المميزات. نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت و جميع الأدوات اللازمة لتوفير بيئة عمل مثالية لفرق خدمة العملاء مجانا. نغني عملاؤنا عن تكلفة التشغيل و تكلفة التدريب و التوظيف. نقدم تقارير للاداء و اراء العميل النهائي و تسجيل المكالمات بشكل شهري. نوفر مدير حساب خاص بك و مشرف فريق خدمة العملاء و مراقب جودة لضمان أعلى مستوى خدمة.`,
-                    industry: `شركات التطوير العقاري. شركات الوساطة والتسويق العقاري. منصات بيع وتأجير العقارات.`,
-                    challenges: `ركود العمليات البيعية و قلة الوصول للعملاء. فقدان Leads. متابعة غير منتظمة للعملاء المحتملين. عدم استغلال قواعد بيانات Leads القديمة. عدم وجود نظام واضح لتتبع مصدر وجودة الـ Lead. اعتماد كامل على فريق المبيعات في التصفية والمتابعة ال leads.`,
-                    solution: `مركز اتصال مخصص لإدارة الـ Leads. رد فوري على جميع القنوات (هاتف – واتساب – إعلانات). تأهيل أولي للعميل (Budget – Location – Purpose). جدولة مواعيد المعاينة. تقارير دورية عن جودة الإعلانات ومصادر الـ Leads. النشر على منصات الخاصة بالمعاملات العقارية. تقديم خدمة Outbound Lead Generation تعتمد على التواصل الاستباقي مع عملاء محتملين.`,
-                    roi: `زيادة معدل اغلاق الصفقات. سرعة الاستجابة واستغلال أفضل للميزانية الإعلانية. توفير Leads مؤهلة. تقليل الإرهاق والدوران الوظيفي. تجربة شراء فريدة وزيادة رضا العملاء و بناء علاقة طويلة الأجل. تقليل الاعتماد علي الاعلانات فقط في توفير الـ leads.`
+                title: { ar: 'التطوير والوساطة العقارية', en: 'Real Estate Development & Brokerage' },
+                icon: 'home',
+                about: { 
+                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة للعقارات.`,
+                    en: `We offer integrated BPO and cloud communication solutions tailored for real estate.`
                 },
-                en: {
-                    title: 'Real Estate Development & Brokerage',
-                    about: `We offer integrated BPO and cloud communication solutions tailored for real estate development and brokerage companies, focusing on managing potential clients (Leads), response speed, initial qualification, and operational follow-up.`,
-                    benefits: `We work as a direct extension of your brand, with teams trained on the real estate field, policies, and communication tone specific to the company, with high scalability during peak seasons. We provide multi-channel customer support (phone, WhatsApp, social media) through our high-quality cloud communication system with all features. We provide modern offices, equipment, stable high-speed internet, and all necessary tools to create an ideal work environment for customer service teams at no cost. We save our clients from operating costs, training costs, and hiring costs. We provide monthly performance reports, final customer opinions, and call recordings. We provide a dedicated account manager, customer service team supervisor, and quality monitor to ensure the highest level of service.`,
-                    industry: `Real estate development companies. Real estate brokerage and marketing companies. Real estate sales and rental platforms.`,
-                    challenges: `Stagnation of sales operations and difficulty reaching customers. Loss of Leads. Irregular follow-up with potential clients. Not exploiting old Leads databases. No clear system to track the source and quality of the Lead. Complete reliance on the sales team for filtering and following up on leads.`,
-                    solution: `Dedicated call center for managing Leads. Immediate response on all channels (phone - WhatsApp - ads). Initial qualification of the client (Budget - Location - Purpose). Scheduling viewings. Periodic reports on ad quality and Leads sources. Publishing on specialized real estate transaction platforms. Providing Outbound Lead Generation service based on proactive communication with potential clients.`,
-                    roi: `Increase deal closing rate. Response speed and better utilization of advertising budget. Provide qualified Leads. Reduce fatigue and employee turnover. Unique buying experience, increased customer satisfaction, and building long-term relationships. Reduce reliance only on ads to provide leads.`
-                }
+                benefits: {
+                    ar: `مركز اتصال مخصص لإدارة الـ Leads. رد فوري على جميع القنوات.`,
+                    en: `Dedicated call center for managing Leads. Immediate response on all channels.`
+                },
+                industry: { ar: 'شركات التطوير العقاري والوساطة', en: 'Real estate development and brokerage companies' },
+                challenges: [
+                    { ar: 'ركود العمليات البيعية', en: 'Stagnation of sales operations' },
+                    { ar: 'فقدان Leads', en: 'Loss of Leads' },
+                    { ar: 'متابعة غير منتظمة', en: 'Irregular follow-up' },
+                    { ar: 'عدم استغلال قواعد بيانات', en: 'Not exploiting old databases' }
+                ],
+                solution: [
+                    { ar: 'تأهيل أولي للعميل', en: 'Initial qualification of client' },
+                    { ar: 'جدولة مواعيد المعاينة', en: 'Scheduling viewings' },
+                    { ar: 'تقارير دورية', en: 'Periodic reports' },
+                    { ar: 'خدمة Outbound', en: 'Outbound service' }
+                ],
+                roi: [
+                    { ar: 'زيادة معدل اغلاق الصفقات', en: 'Increase deal closing rate' },
+                    { ar: 'توفير Leads مؤهلة', en: 'Provide qualified Leads' },
+                    { ar: 'تجربة شراء فريدة', en: 'Unique buying experience' }
+                ]
             },
             cleaning: {
-                ar: {
-                    title: 'خدمات التنظيف ومكافحة الحشرات',
-                    about: `نقدّم حلول تعهيد أعمال (BPO) وأنظمة تواصل سحابية متكاملة صُمّمت خصيصًا لشركات النظافة ومكافحة الحشرات، بهدف تنظيم إدارة العملاء وتحسين كفاءة التشغيل اليومي. نعمل كشريك تشغيلي فعلي للشركة، ندير جميع نقاط التواصل مع العملاء بدايةً من استقبال الطلبات، مرورًا بحجز وجدولة الزيارات، وحتى متابعة التنفيذ والتعامل مع الشكاوى والاستفسارات.`,
-                    benefits: `فرقنا مدرّبة على طبيعة خدمات النظافة ومكافحة الحشرات، ونعمل كامتداد مباشر لعلامتك التجارية مع الالتزام الكامل بمعايير الجودة وتجربة العميل، دون تحميل فرقك الميدانية أي أعباء إضافية. نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، تواصل اجتماعي) عن طريق نظام الاتصال السحابي الخاص بنا ذو الجودة العالية مع كل المميزات. نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت و جميع الأدوات اللازمة لتوفير بيئة عمل مثالية لفرق خدمة العملاء مجانا. نغني عملاؤنا عن تكلفة التشغيل و تكلفة التدريب و التوظيف. نقدم تقارير للاداء و اراء العميل النهائي و تسجيل المكالمات بشكل شهري. نوفر مدير حساب خاص بك و مشرف فريق خدمة العملاء و مراقب جودة لضمان أعلى مستوى خدمة.`,
-                    industryOverview: `حجم السوق: قطاع واسع ومتعدد الشرائح يخدم المنازل، المنشآت التجارية، المصانع، المطاعم، المستشفيات، المدارس، والمجمعات السكنية. اتجاه النمو: يشهد السوق نموًا متسارعًا نتيجة زيادة الوعي بالصحة العامة، التشريعات الحكومية، والاعتماد المتزايد على الشركات المتخصصة بدل الحلول الفردية. حدة المنافسة: منافسة عالية بسبب كثرة الشركات الصغيرة والمتوسطة، مع اعتماد العملاء بشكل كبير على سرعة الاستجابة والسعر كعامل حاسم في اتخاذ القرار.`,
-                    challenges: `التأخر في الرد على الاستفسارات والطلبات العاجلة، مما يؤدي إلى فقدان العميل لصالح منافس آخر. غياب المتابعة بعد تقديم الخدمة. صعوبة التعامل مع الشكاوى أو إعادة الخدمة في حال عدم رضا العميل لعدم وجود توثيق واضح. كثرة استفسارات العملاء حول التسعير الذي يعتمد على مساحة المكان.`,
-                    solution: `نوفر فرقًا متخصصة لإدارة طلبات خدمات النظافة ومكافحة الحشرات والتواصل مع العملاء عبر الهاتف، واتساب، وقنوات التواصل المختلفة. نقوم بتجميع وحفظ بيانات العملاء، نوع الخدمة، تاريخ الزيارات، مستوى الإصابة أو النظافة، والتوصيات المستقبلية. ندير الحوار مع العميل بطريقة احترافية تساعد على اختيار الخدمة المناسبة واقتراح باقات دورية أو خدمات إضافية في التوقيت الصحيح. يتم تحديد التكلفة وعدد أفراد الفريق بناءً على مساحة المكان ونطاق أعمال التنظيف المطلوبة. نوفر مكاتب مجهّزة، أجهزة حديثة، إنترنت سريع وثابت، وجميع الأدوات اللازمة لتوفير بيئة عمل مثالية لفرق خدمة العملاء دون أي تكلفة إضافية. نغني عملاءنا عن تكاليف التشغيل، التوظيف، والتدريب. نقدّم تقارير أداء شهرية تشمل عدد الطلبات، نسب التحويل، رضا العملاء، تسجيل المكالمات، وملاحظات الجودة. نوفر مراقب جودة لضمان أعلى مستوى من الخدمة واستمرارية الأداء.`,
-                    roi: `زيادة الطلبات المتكررة من خلال بناء قاعدة عملاء منظمة وخطط خدمات دورية. رفع متوسط قيمة الطلب عبر تقديم باقات وصيانة دورية وخدمات إضافية مناسبة. تقليل فقدان العملاء الناتج عن التأخر في الرد أو سوء إدارة الشكاوى. تحسين سمعة الشركة وزيادة رضا العملاء وبناء علاقة طويلة الأمد قائمة على الثقة. توفير رؤية واضحة لإدارة الشركة حول أداء الفرق، جودة الخدمات، وتجربة العميل بشكل شامل.`
+                title: { ar: 'خدمات التنظيف ومكافحة الحشرات', en: 'Cleaning & Pest Control Services' },
+                icon: 'cleaning_services',
+                about: { 
+                    ar: `نقدّم حلول تعهيد أعمال (BPO) وأنظمة تواصل سحابية متكاملة صُمّمت خصيصًا لشركات النظافة.`,
+                    en: `We offer integrated BPO and cloud communication solutions specifically designed for cleaning companies.`
                 },
-                en: {
-                    title: 'Cleaning & Pest Control Services',
-                    about: `We offer integrated BPO and cloud communication solutions specifically designed for cleaning and pest control companies, aiming to organize customer management and improve daily operational efficiency. We act as an actual operational partner for the company, managing all points of contact with customers from receiving requests, through booking and scheduling visits, to following up on implementation and handling complaints and inquiries.`,
-                    benefits: `Our teams are trained on the nature of cleaning and pest control services, and we work as a direct extension of your brand with full commitment to quality standards and customer experience, without adding any additional burden to your field teams. We provide multi-channel customer support (phone, WhatsApp, social media) through our high-quality cloud communication system with all features. We provide modern offices, equipment, stable high-speed internet, and all necessary tools to create an ideal work environment for customer service teams at no cost. We save our clients from operating costs, training costs, and hiring costs. We provide monthly performance reports, final customer opinions, and call recordings. We provide a dedicated account manager, customer service team supervisor, and quality monitor to ensure the highest level of service.`,
-                    industryOverview: `Market Size: A wide and multi-sector sector serving homes, commercial establishments, factories, restaurants, hospitals, schools, and residential complexes. Growth Trend: The market is witnessing accelerated growth due to increased public health awareness, government legislation, and increasing reliance on specialized companies instead of individual solutions. Competition Level: High competition due to the many small and medium companies, with customers heavily relying on response speed and price as decisive factors in decision-making.`,
-                    challenges: `Delay in responding to urgent inquiries and requests, leading to customer loss to a competitor. Absence of follow-up after providing the service. Difficulty in handling complaints or re-service in case of customer dissatisfaction due to lack of clear documentation. Many customer inquiries about pricing that depends on the area of the place.`,
-                    solution: `We provide specialized teams to manage cleaning and pest control service requests and communicate with customers via phone, WhatsApp, and various communication channels. We collect and save customer data, service type, visit history, infection or cleanliness level, and future recommendations. We manage the dialogue with the customer in a professional way that helps choose the appropriate service and suggest periodic packages or additional services at the right time. The cost and number of team members are determined based on the area of the place and the scope of required cleaning work. We provide equipped offices, modern equipment, fast and stable internet, and all necessary tools to create an ideal work environment for customer service teams without any additional cost. We save our clients from operating, hiring, and training costs. We provide monthly performance reports including number of requests, conversion rates, customer satisfaction, call recordings, and quality notes. We provide a quality monitor to ensure the highest level of service and performance continuity.`,
-                    roi: `Increase repeat orders by building an organized customer base and periodic service plans. Raise average order value by offering periodic packages, maintenance, and suitable additional services. Reduce customer loss due to delayed response or poor complaint management. Improve company reputation, increase customer satisfaction, and build long-term relationships based on trust. Provide clear vision for company management about team performance, service quality, and customer experience comprehensively.`
-                }
+                benefits: {
+                    ar: `فرقنا مدرّبة على طبيعة خدمات النظافة. نوفر مكاتب مجهّزة.`,
+                    en: `Our teams are trained on the nature of cleaning services. We provide equipped offices.`
+                },
+                challenges: [
+                    { ar: 'التأخر في الرد على الاستفسارات', en: 'Delay in responding to urgent inquiries' },
+                    { ar: 'غياب المتابعة بعد تقديم الخدمة', en: 'Absence of follow-up after providing service' },
+                    { ar: 'صعوبة التعامل مع الشكاوى', en: 'Difficulty in handling complaints' },
+                    { ar: 'كثرة استفسارات العملاء', en: 'Many customer inquiries' }
+                ],
+                solution: [
+                    { ar: 'نوفر فرقًا متخصصة', en: 'We provide specialized teams' },
+                    { ar: 'نقوم بتجميع وحفظ بيانات العملاء', en: 'We collect and save customer data' },
+                    { ar: 'يتم تحديد التكلفة', en: 'Cost is determined' },
+                    { ar: 'نقدّم تقارير أداء', en: 'We provide comprehensive monthly performance reports' }
+                ],
+                roi: [
+                    { ar: 'زيادة الطلبات المتكررة', en: 'Increase repeat orders' },
+                    { ar: 'رفع متوسط قيمة الطلب', en: 'Raise average order value' },
+                    { ar: 'تحسين سمعة الشركة', en: 'Improve company reputation' }
+                ]
             }
         };
 
         // Load content based on service and language
-        const serviceData = services[service][lang];
+        const data = services[service];
         
-        let html = `
-            <h2 class="modal-title">${serviceData.title}</h2>
-            
-            <div class="modal-section">
-                <div class="modal-section-title">
-                    <i class="material-icons">business</i>
-                    <span>${lang === 'ar' ? 'عن شركتنا في هذا المجال' : 'About Our Company in This Field'}</span>
+        let html = '';
+
+        // 1. About Section (Large Highlight Card)
+        html += `
+            <div class="section-block">
+                <div class="info-card" style="background: var(--gradient-soft);">
+                    <div class="section-title">
+                        <i class="material-icons">business_center</i>
+                        <span>${lang === 'ar' ? 'عن شركتنا في هذا المجال' : 'About Our Company in This Field'}</span>
+                    </div>
+                    <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); margin-top: 10px;">
+                        ${data.about[lang]}
+                    </div>
                 </div>
-                <div class="modal-content">${serviceData.about}</div>
-            </div>
-            
-            <div class="modal-section">
-                <div class="modal-section-title">
-                    <i class="material-icons">verified</i>
-                    <span>${lang === 'ar' ? 'الفوائد' : 'Benefits'}</span>
-                </div>
-                <div class="modal-content">${serviceData.benefits}</div>
             </div>
         `;
-        
-        if (serviceData.industry) {
+
+        // 2. Industry Overview (if exists)
+        if (data.industry || data.industryOverview) {
+            const content = data.industry || data.industryOverview;
             html += `
-                <div class="modal-section">
-                    <div class="modal-section-title">
-                        <i class="material-icons">category</i>
-                        <span>${lang === 'ar' ? 'الصناعة المستهدفة' : 'Targeted Industry'}</span>
-                    </div>
-                    <div class="modal-content">${serviceData.industry}</div>
-                </div>
-            `;
-        }
-        
-        if (serviceData.industryOverview) {
-            html += `
-                <div class="modal-section">
-                    <div class="modal-section-title">
+                <div class="section-block">
+                    <div class="section-title">
                         <i class="material-icons">insights</i>
                         <span>${lang === 'ar' ? 'نظرة عامة على الصناعة' : 'Industry Overview'}</span>
                     </div>
-                    <div class="modal-content">${serviceData.industryOverview}</div>
+                    <div class="info-card">
+                        ${content[lang]}
+                    </div>
                 </div>
             `;
         }
-        
-        if (serviceData.challenges) {
+
+        // 3. Challenges (Grid of Warning Cards)
+        if (data.challenges && data.challenges.length > 0) {
             html += `
-                <div class="modal-section">
-                    <div class="modal-section-title">
-                        <i class="material-icons">error_outline</i>
+                <div class="section-block">
+                    <div class="section-title">
+                        <i class="material-icons" style="color:#D32F2F">warning</i>
                         <span>${lang === 'ar' ? 'المشاكل التي تواجه الصناعة' : 'Industry Challenges'}</span>
                     </div>
-                    <ul class="modal-list">
-                        ${serviceData.challenges.split('. ').filter(point => point.trim()).map(point => `<li>${point.trim()}.</li>`).join('')}
-                    </ul>
+                    <div class="challenge-list">
+            `;
+            data.challenges.forEach(item => {
+                html += `<div class="challenge-item"><i class="material-icons" style="font-size:1.2rem; margin-left: 10px;">error_outline</i> ${item[lang]}</div>`;
+            });
+            html += `
+                    </div>
                 </div>
             `;
         }
-        
-        if (serviceData.solution) {
+
+        // 4. Solution (Grid of Feature Cards)
+        if (data.solution && data.solution.length > 0) {
             html += `
-                <div class="modal-section">
-                    <div class="modal-section-title">
-                        <i class="material-icons">lightbulb</i>
+                <div class="section-block">
+                    <div class="section-title">
+                        <i class="material-icons" style="color:var(--secondary-blue)">lightbulb</i>
                         <span>${lang === 'ar' ? 'الحل الذي تقدمه شركتنا' : 'Our Solution'}</span>
                     </div>
-                    <ul class="modal-list">
-                        ${serviceData.solution.split('. ').filter(point => point.trim()).map(point => `<li>${point.trim()}.</li>`).join('')}
-                    </ul>
+                    <div class="solution-list">
+            `;
+            data.solution.forEach(item => {
+                html += `<div class="solution-item"><i class="material-icons" style="margin-bottom:10px; display:block;">check_circle</i> ${item[lang]}</div>`;
+            });
+            html += `
+                    </div>
                 </div>
             `;
         }
         
-        if (serviceData.roi) {
-            html += `
-                <div class="modal-section">
-                    <div class="modal-section-title">
-                        <i class="material-icons">trending_up</i>
-                        <span>${lang === 'ar' ? 'العائد على الصناعة' : 'Industry ROI'}</span>
+        // 5. Benefits (Highlights)
+        if (data.benefits) {
+             html += `
+                <div class="section-block">
+                    <div class="section-title">
+                        <i class="material-icons">verified</i>
+                        <span>${lang === 'ar' ? 'الفوائد' : 'Benefits'}</span>
                     </div>
-                    <ul class="modal-list">
-                        ${serviceData.roi.split('. ').filter(point => point.trim()).map(point => `<li>${point.trim()}.</li>`).join('')}
-                    </ul>
+                    <div class="highlight-card">
+                        <i class="material-icons">stars</i>
+                        <div style="font-size: 1rem;">${data.benefits[lang]}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 6. ROI (Gradient Section)
+        if (data.roi && data.roi.length > 0) {
+            html += `
+                <div class="section-block">
+                    <div class="roi-section">
+                        <div class="roi-title">
+                            <i class="material-icons">trending_up</i>
+                            <span>${lang === 'ar' ? 'العائد على الصناعة' : 'Industry ROI'}</span>
+                        </div>
+                        <div class="roi-grid">
+            `;
+            data.roi.forEach(item => {
+                html += `<div class="roi-item">${item[lang]}</div>`;
+            });
+            html += `
+                        </div>
+                    </div>
                 </div>
             `;
         }
         
         modalContent.innerHTML = html;
+    }
+
+    // Print only the currently open Service Profile
+    function printServiceProfile() {
+        const modal = document.getElementById('serviceModal');
+        if (!modal.classList.contains('active')) return; // لا يوجد Service Profile مفتوح
+
+        const body = document.body;
+        body.classList.add('print-service');
+
+        const handleAfterPrint = () => {
+            body.classList.remove('print-service');
+            window.removeEventListener('afterprint', handleAfterPrint);
+        };
+
+        window.addEventListener('afterprint', handleAfterPrint);
+        window.print();
     }
 </script>
 
