@@ -1,29 +1,10 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CallVa - Company Profile</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="icon" href="Icon.png" type="image/png"/>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>CSS Gradient Generator</title>
     <style>
-        :root {
-            --primary-purple: #7700C4;
-            --secondary-blue: #2E3192;
-            --gradient-main: linear-gradient(135deg, #7700C4 0%, #2E3192 100%);
-            --gradient-soft: linear-gradient(135deg, #F3E5F5 0%, #E8EAF6 100%);
-            --text-dark: #1A1A1A;
-            --text-gray: #555555;
-            --white: #FFFFFF;
-            --font-ar: 'Cairo', sans-serif;
-            --font-en: 'Montserrat', sans-serif;
-            --shadow: 0 10px 30px rgba(119, 0, 196, 0.1);
-            --radius: 16px;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -31,2049 +12,541 @@
         }
 
         body {
-            font-family: var(--font-ar);
-            background-color: #F9F9FC;
-            color: var(--text-dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            color: #eee;
             min-height: 100vh;
-            overflow: hidden;
-            transition: font-family 0.3s ease;
-        }
-
-        body.en-version {
-            font-family: var(--font-en);
-        }
-
-        /* Presentation Container */
-        .presentation-container {
-            width: 100%;
-            max-width: 1280px;
-            aspect-ratio: 16/9;
-            background: var(--white);
-            border-radius: var(--radius);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Slides */
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            padding: 60px 80px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.5s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            background: var(--white);
-            overflow-y: auto;
-        }
-
-        .slide.active {
-            opacity: 1;
-            visibility: visible;
-            z-index: 2;
-        }
-
-        /* Language Toggle */
-        .lang-toggle {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            z-index: 20;
-            background: white;
-            border: 1px solid rgba(119, 0, 196, 0.2);
-            border-radius: 30px;
-            padding: 8px 16px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .lang-toggle:hover {
-            background: var(--gradient-main);
-            color: white;
-            border-color: transparent;
-        }
-
-        .lang-toggle span {
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        /* Typography */
-        h1, h2, h3 {
-            color: var(--text-dark);
-        }
-
-        .brand-name {
-            font-family: var(--font-en);
-            font-weight: 800;
-            font-size: 4rem;
-            background: var(--gradient-main);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            color: transparent;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-        }
-
-        .slide-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 30px;
-            color: var(--secondary-blue);
-            position: relative;
-            display: inline-block;
-        }
-
-        .slide-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            right: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--gradient-main);
-            border-radius: 2px;
-        }
-
-        body.en-version .slide-title::after {
-            right: auto;
-            left: 0;
-        }
-
-        .slide-content {
-            font-size: 1.25rem;
-            line-height: 1.8;
-            color: var(--text-gray);
-        }
-
-        .tagline {
-            font-family: var(--font-en);
-            font-size: 1.5rem;
-            color: var(--text-gray);
-            margin-top: 20px;
-            font-weight: 400;
-            letter-spacing: 1px;
-        }
-
-        /* Specific Slide Layouts */
-        
-        /* Slide 1: Cover */
-        .cover-slide {
-            text-align: center;
-            justify-content: center;
-            background: linear-gradient(180deg, rgba(255,255,255,255,0) 0%, rgba(230,230,250,0.3) 100%);
-        }
-        .cover-slide .logo-large {
-            font-size: 6rem;
-            margin-bottom: 0;
-        }
-        .cover-subtitle {
-            font-family: var(--font-en);
-            font-size: 1.8rem;
-            color: var(--primary-purple);
-            font-weight: 600;
-            margin: 20px 0;
-        }
-
-        /* Lists & Grids */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            width: 100%;
-        }
-
-        .grid-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            width: 100%;
-        }
-
-        .feature-list {
-            list-style: none;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 25px;
-            font-size: 1.2rem;
-        }
-
-        .feature-item i {
-            background: var(--gradient-main);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-left: 20px; /* RTL margin */
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        body.en-version .feature-item i {
-            margin-left: 0;
-            margin-right: 20px; /* LTR margin */
-        }
-
-        .service-card, .industry-card {
-            background: var(--gradient-soft);
-            padding: 25px;
-            border-radius: 12px;
-            text-align: center;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(119, 0, 196, 0.05);
-            cursor: pointer;
-        }
-
-        .service-card:hover, .industry-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow);
-            border-color: var(--primary-purple);
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            color: var(--primary-purple);
-            margin-bottom: 15px;
-        }
-
-        .card-title {
-            font-weight: 700;
-            color: var(--secondary-blue);
-            font-size: 1.1rem;
-        }
-
-        /* Timeline for Operating Model */
-        .timeline-container {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
-            position: relative;
-        }
-        
-        .timeline-container::before {
-            content: '';
-            position: absolute;
-            top: 25px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: #E0E0E0;
-            z-index: 0;
-        }
-
-        .timeline-step {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-            width: 18%;
-        }
-
-        .step-circle {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-main);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 15px;
-            font-weight: bold;
-            font-family: var(--font-en);
-            border: 4px solid white;
-        }
-
-        .step-title {
-            font-weight: 700;
-            color: var(--primary-purple);
-            margin-bottom: 5px;
-            font-size: 1rem;
-        }
-        
-        .step-desc {
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            line-height: 1.4;
-        }
-
-        /* Team Structure - Org Chart style */
-        .org-chart {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        .team-level {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-        .team-role {
-            background: white;
-            border: 2px solid var(--primary-purple);
-            color: var(--primary-purple);
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-        }
-        .team-role.manager {
-            background: var(--gradient-main);
-            color: white;
-            border: none;
-            width: 200px;
-        }
-
-        /* Navigation Controls */
-        .nav-container {
-            position: absolute;
-            bottom: 30px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 40px;
-            z-index: 10;
-        }
-
-        .nav-btn {
-            background: white;
-            border: 1px solid rgba(119, 0, 196, 0.2);
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: var(--primary-purple);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .nav-btn:hover {
-            background: var(--gradient-main);
-            color: white;
-            transform: scale(1.1);
-        }
-
-        .progress-indicator {
-            font-family: var(--font-en);
-            color: #999;
-            font-size: 1.1rem;
-            background: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        
-        .slide-number {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            font-family: var(--font-en);
-            font-size: 1rem;
-            color: #ddd;
-            font-weight: 700;
-        }
-
-        body.en-version .slide-number {
-            right: auto;
-            left: 40px;
-        }
-
-        /* Contact Slide */
-        .contact-info {
-            text-align: center;
-            background: var(--gradient-main);
-            color: white;
-            padding: 40px;
-            border-radius: 20px;
-            margin-top: 30px;
-        }
-        .contact-info h2 {
-            color: white;
-            font-family: var(--font-en);
-            margin-bottom: 10px;
-        }
-        .contact-details {
-            font-size: 1.5rem;
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-        }
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* Print Button */
-        .print-btn {
-            background: white;
-            border: 1px solid rgba(119, 0, 196, 0.2);
-            border-radius: 30px;
-            padding: 8px 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            font-weight: 600;
-            font-size: 0.9rem;
-            color: var(--primary-purple);
-        }
-
-        .print-btn:hover {
-            background: var(--gradient-main);
-            color: white;
-            border-color: transparent;
-        }
-
-        /* Decorative Elements */
-        .bg-circle {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: 0;
-        }
-        .circle-1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(119, 0, 196, 0.05);
-            top: -100px;
-            right: -100px;
-        }
-        .circle-2 {
-            width: 300px;
-            height: 300px;
-            background: rgba(46, 49, 146, 0.05);
-            bottom: -50px;
-            left: -50px;
-        }
-
-        /* Language-specific content */
-        .ar-content {
-            display: block;
-        }
-        
-        .en-content {
-            display: none;
-        }
-        
-        body.en-version .ar-content {
-            display: none;
-        }
-        
-        body.en-version .en-content {
-            display: block;
-        }
-
-        /* Service Profile Modal - REDESIGNED */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 100;
-            display: none;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
-            backdrop-filter: blur(5px);
         }
 
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal-container {
-            background: var(--white);
-            border-radius: 24px;
-            width: 90%;
+        .container {
             max-width: 1200px;
-            max-height: 90vh;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 25px 80px rgba(0,0,0,0.3);
-            animation: modalFadeIn 0.3s ease-out;
+            margin: 0 auto;
         }
 
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.95) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .modal-header {
-            padding: 30px 40px;
-            background: var(--gradient-soft);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(119, 0, 196, 0.1);
-        }
-
-        .modal-title-large {
-            font-size: 2rem;
-            color: var(--primary-purple);
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        
-        .modal-title-large i {
-            font-size: 2.5rem;
-        }
-
-        .modal-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal-close,
-        .modal-print {
-            background: white;
-            border: 1px solid rgba(119, 0, 196, 0.2);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 24px;
-            color: var(--primary-purple);
-            transition: all 0.2s ease;
-            z-index: 10;
-        }
-
-        .modal-close:hover,
-        .modal-print:hover {
-            background: var(--primary-purple);
-            color: white;
-        }
-
-        .modal-body {
-            padding: 40px;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        .modal-tabs {
-            display: flex;
+        h1 {
+            text-align: center;
             margin-bottom: 30px;
-            border-bottom: 2px solid #eee;
+            font-size: 2.5rem;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .modal-tab {
-            padding: 15px 30px;
-            cursor: pointer;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--text-gray);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .modal-tab.active {
-            color: var(--primary-purple);
-        }
-
-        .modal-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            right: 0;
-            width: 100%;
-            height: 3px;
-            background: var(--gradient-main);
-            border-radius: 3px 3px 0 0;
-        }
-
-        body.en-version .modal-tab.active::after {
-            right: auto;
-            left: 0;
-            border-radius: 0 0 3px 3px;
-        }
-
-        .section-block {
-            margin-bottom: 40px;
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            color: var(--secondary-blue);
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title i {
-            color: var(--primary-purple);
-            font-size: 1.6rem;
-        }
-
-        .info-card {
-            background: white;
-            border: 1px solid #eee;
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        .grid-card-2 {
+        .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-top: 20px;
+            gap: 30px;
         }
 
-        .highlight-card {
-            background: linear-gradient(135deg, #fff 0%, #f9f9fc 100%);
-            border-left: 5px solid var(--primary-purple);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        body.en-version .highlight-card {
-            border-left: none;
-            border-right: 5px solid var(--primary-purple);
-        }
-        
-        .highlight-card i {
-            color: var(--secondary-blue);
-            font-size: 2rem;
-            margin-top: 3px;
-        }
-
-        .challenge-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-        }
-
-        .challenge-item {
-            background: #FFF5F5;
-            border: 1px solid #FFEBEE;
-            border-radius: 8px;
-            padding: 15px;
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            color: #C62828;
-            font-size: 0.95rem;
-        }
-        
-        .solution-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .solution-item {
-            background: #F3E5F5;
-            border: 1px solid rgba(119, 0, 196, 0.1);
-            border-radius: 12px;
-            padding: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .solution-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(119, 0, 196, 0.15);
-        }
-
-        .roi-section {
-            background: var(--gradient-main);
-            color: white;
-            border-radius: 16px;
-            padding: 30px;
-            margin-top: 30px;
-            text-align: center;
-        }
-        
-        .roi-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .roi-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-        }
-
-        .roi-item {
-            background: rgba(255,255,255, 0.1);
-            border: 1px solid rgba(255,255,255, 0.2);
-            border-radius: 10px;
-            padding: 15px;
-            font-weight: 600;
-        }
-
-        /* Utility */
-        .en-font { font-family: var(--font-en); }
-        .hidden { display: none; }
-        
-        /* Print Styles */
-        @media print {
-            body {
-                background-color: white;
-                color: black;
-                display: block;
-                height: auto;
-                overflow: visible;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
-            }
-
-            /* تصغير حجم صفحة Service Profile لتحتوي كل المحتوى في ورقة A4 واحدة قدر الإمكان */
-            body.print-service {
-                zoom: 0.68;
-            }
-            
-            .presentation-container {
-                width: 100%;
-                max-width: none;
-                aspect-ratio: auto;
-                box-shadow: none;
-                border-radius: 0;
-                display: block;
-                overflow: visible;
-            }
-            
-            .nav-container, .lang-toggle, .bg-circle {
-                display: none !important;
-            }
-            
-            .slide {
-                position: relative;
-                opacity: 1;
-                visibility: visible;
-                page-break-after: always;
-                padding: 40px;
-                min-height: 100vh; /* مساوية تقريباً لارتفاع صفحة A4 */
-                display: flex;
-                flex-direction: column;
-                justify-content: center; /* توسيط عمودي لكل الشرائح */
-            }
-
-            /* عند طباعة Service Profile نخفي الشرائح ونطبع المودال فقط */
-            body.print-service .slide {
-                display: none !important;
-            }
-
-            .slide-number {
-                position: static;
-                margin-bottom: 10px;
-                font-size: 10pt;
-                color: #999;
-            }
-            
-            .slide-title {
-                color: var(--secondary-blue);
-                font-size: 20pt;
-                margin-bottom: 20px;
-            }
-            
-            .slide-content {
-                font-size: 11pt;
-                line-height: 1.6;
-                color: black;
-            }
-            
-            .service-card, .industry-card, .feature-item {
-                break-inside: avoid;
-                border: 1px solid #ddd;
-                margin-bottom: 10px;
-                page-break-inside: avoid;
-            }
-            
-            .grid-2, .grid-3 {
-                display: grid;
-                gap: 20px;
-            }
-
-            /* طباعة Service Profile (المودال) فقط */
-            body.print-service .presentation-container {
-                display: none !important;
-            }
-
-            body.print-service .modal-overlay {
-                display: block !important;
-                position: static;
-                background: none;
-                padding: 0;
-            }
-
-            body.print-service .modal-container {
-                width: 100%;
-                max-width: none;
-                max-height: none;
-                border-radius: 0;
-                box-shadow: none;
-            }
-
-            body.print-service .modal-body {
-                overflow: visible;
-                font-size: 10pt;
-                line-height: 1.4;
-            }
-
-            body.print-service .modal-actions {
-                display: none;
-            }
-            
-            @page {
-                size: A4; /* طولي (Portrait) */
-                margin: 1cm;
-            }
-            
-            h1, h2, h3 {
-                color: var(--secondary-blue);
-                page-break-after: avoid;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .slide {
-                padding: 30px 20px;
-            }
-            
-            .modal-container {
-                width: 95%;
-                border-radius: 16px;
-            }
-
-            .modal-header, .modal-body {
-                padding: 20px;
-            }
-
-            .grid-card-2, .challenge-list, .solution-list, .roi-grid {
+        @media (max-width: 900px) {
+            .main-content {
                 grid-template-columns: 1fr;
             }
+        }
+
+        .panel {
+            background: #16213e;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .preview-box {
+            height: 300px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .controls-section {
+            margin-bottom: 25px;
+        }
+
+        .controls-section h3 {
+            margin-bottom: 15px;
+            color: #00d9ff;
+            font-size: 1.1rem;
+        }
+
+        .control-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: #aaa;
+            min-width: 80px;
+        }
+
+        select, input[type="range"], input[type="number"] {
+            background: #0f3460;
+            border: 1px solid #1a4a7a;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input[type="number"]:focus {
+            border-color: #00d9ff;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            min-width: 150px;
+            cursor: pointer;
+        }
+
+        input[type="color"] {
+            width: 50px;
+            height: 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        input[type="color"]::-webkit-color-swatch {
+            border: 2px solid #1a4a7a;
+            border-radius: 6px;
+        }
+
+        .color-stops-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .color-stop {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #0f3460;
+            padding: 8px 12px;
+            border-radius: 8px;
+        }
+
+        .color-stop input[type="number"] {
+            width: 60px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #00d9ff, #00b4d8);
+            border: none;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.4);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c5ce7, #5f4dd0);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 5px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+        }
+
+        .btn-danger:hover {
+            box-shadow: 0 5px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .code-output {
+            background: #0d1b2a;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .code-output h3 {
+            margin-bottom: 15px;
+            color: #00ff88;
+        }
+
+        .code-block {
+            background: #1b263b;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: #a8dadc;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .preset-gradients {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .preset {
+            height: 50px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .preset:hover {
+            transform: scale(1.05);
+            border-color: #fff;
+        }
+
+        .randomize-btn {
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #00ff88;
+            color: #1a1a2e;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .gradient-type-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .gradient-type-btn {
+            flex: 1;
+            padding: 10px;
+            background: #0f3460;
+            border: 2px solid transparent;
+            color: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .gradient-type-btn.active {
+            border-color: #00d9ff;
+            background: #1a4a7a;
+        }
+
+        .gradient-type-btn:hover {
+            background: #1a4a7a;
         }
     </style>
 </head>
 <body>
-
-<div class="presentation-container">
-    
-    <!-- Language Toggle Button -->
-    <button class="lang-toggle" id="langToggle">
-        <i class="material-icons">language</i>
-        <span id="langText">English</span>
-    </button>
-    
-    <!-- Slide 1: Cover -->
-    <div class="slide active cover-slide" id="slide-1">
-        <div class="bg-circle circle-1"></div>
-        <div class="ar-content">
-            <h1 class="brand-name logo-large">CallVa</h1>
-            <div class="cover-subtitle">حلول الاتصال السحابية وتعهيد عمليات الأعمال</div>
-            <div class="tagline">Your Brand. Our Voice.</div>
-        </div>
-        <div class="en-content">
-            <h1 class="brand-name logo-large">CallVa</h1>
-            <div class="cover-subtitle">Cloud Communication & BPO Solutions</div>
-            <div class="tagline">Your Brand. Our Voice.</div>
-        </div>
-    </div>
-
-    <!-- Slide 2: Who We Are -->
-    <div class="slide" id="slide-2">
-        <div class="slide-number">01</div>
-        <h2 class="slide-title">
-            <span class="ar-content">من نحن</span>
-            <span class="en-content">Who We Are</span>
-        </h2>
-        <div class="slide-content" style="max-width: 900px;">
-            <div class="ar-content">
-                <p>CallVa هي شركة متخصصة في حلول تعهيد الأعمال (BPO) وأنظمة التواصل السحابي، نعمل كشريك تشغيلي مباشر لعملائنا في إدارة تجربة العملاء، المتابعة، والدعم التشغيلي عبر مختلف الصناعات.</p>
-                <p style="margin-top: 20px;">نُمثّل علامتك التجارية أمام عملائك باحترافية كاملة، من أول تواصل وحتى ما بعد إتمام الخدمة، مع فرق مدرّبة، أنظمة مرنة، وقابلية عالية للتوسع.</p>
-            </div>
-            <div class="en-content">
-                <p>CallVa is a specialized company in Business Process Outsourcing (BPO) and cloud communication systems. We work as a direct operational partner for our clients in managing customer experience, follow-up, and operational support across various industries.</p>
-                <p style="margin-top: 20px;">We represent your brand to your customers with complete professionalism, from first contact until after service completion, with trained teams, flexible systems, and high scalability.</p>
-            </div>
-            <div style="margin-top: 40px; display: flex; justify-content: center; gap: 30px;">
-                <i class="material-icons" style="font-size: 40px; color: var(--primary-purple);">handshake</i>
-                <i class="material-icons" style="font-size: 40px; color: var(--secondary-blue);">cloud</i>
-                <i class="material-icons" style="font-size: 40px; color: var(--primary-purple);">support_agent</i>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 3: Our Vision -->
-    <div class="slide" id="slide-3">
-        <div class="slide-number">02</div>
-        <div style="text-align: center;">
-            <h2 class="slide-title" style="margin-bottom: 50px; text-align: center; display: inline-block;">
-                <span class="ar-content">رؤيتنا</span>
-                <span class="en-content">Our Vision</span>
-            </h2>
-            <i class="material-icons" style="font-size: 60px; color: var(--gradient-main); margin-bottom: 30px; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">visibility</i>
-            <p class="slide-content" style="font-size: 1.5rem; font-weight: 600; color: var(--secondary-blue);">
-                <span class="ar-content">أن نكون الشريك التشغيلي المفضل للشركات التي تسعى إلى تحسين تجربة العملاء، خفض التكاليف التشغيلية، وتحقيق نمو مستدام دون تعقيد.</span>
-                <span class="en-content">To be the preferred operational partner for companies seeking to improve customer experience, reduce operational costs, and achieve sustainable growth without complexity.</span>
-            </p>
-        </div>
-    </div>
-
-    <!-- Slide 4: Our Mission -->
-    <div class="slide" id="slide-4">
-        <div class="slide-number">03</div>
-        <div style="text-align: center;">
-            <h2 class="slide-title" style="margin-bottom: 50px; text-align: center; display: inline-block;">
-                <span class="ar-content">مهمتنا</span>
-                <span class="en-content">Our Mission</span>
-            </h2>
-            <p class="slide-content">
-                <span class="ar-content">تمكين عملائنا من التركيز على أعمالهم الأساسية، بينما ندير نحن عمليات التواصل، الدعم، والمتابعة بكفاءة عالية، من خلال فرق متخصصة وأنظمة اتصال سحابية متطورة.</span>
-                <span class="en-content">To empower our clients to focus on their core business while we efficiently manage communication, support, and follow-up operations through specialized teams and advanced cloud communication systems.</span>
-            </p>
-            <div class="grid-3" style="margin-top: 50px;">
-                <div class="service-card">
-                    <i class="material-icons card-icon">verified</i>
-                    <div class="card-title">
-                        <span class="ar-content">كفاءة عالية</span>
-                        <span class="en-content">High Efficiency</span>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <i class="material-icons card-icon">security</i>
-                    <div class="card-title">
-                        <span class="ar-content">أنظمة متطورة</span>
-                        <span class="en-content">Advanced Systems</span>
-                    </div>
-                </div>
-                <div class="service-card">
-                    <i class="material-icons card-icon">record_voice_over</i>
-                    <div class="card-title">
-                        <span class="ar-content">فرق متخصصة</span>
-                        <span class="en-content">Specialized Teams</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 5: What Makes CallVa Different -->
-    <div class="slide" id="slide-5">
-        <div class="slide-number">04</div>
-        <h2 class="slide-title">
-            <span class="ar-content">ما الذي يميز كالفا؟</span>
-            <span class="en-content">What Makes CallVa Different?</span>
-        </h2>
-        <div class="grid-2">
-            <ul class="feature-list">
-                <li class="feature-item">
-                    <i class="material-icons">business</i>
-                    <div>
-                        <strong>
-                            <span class="ar-content">امتداد حقيقي لعلامتك التجارية:</span>
-                            <span class="en-content">True Extension of Your Brand:</span>
-                        </strong>
-                        <span class="ar-content"> نعمل كجزء من فريقكم، وليس كمركز اتصال تقليدي.</span>
-                        <span class="en-content"> We work as part of your team, not as a traditional call center.</span>
-                    </div>
-                </li>
-                <li class="feature-item">
-                    <i class="material-icons">school</i>
-                    <div>
-                        <strong>
-                            <span class="ar-content">فرق مخصصة ومدرّبة:</span>
-                            <span class="en-content">Dedicated & Trained Teams:</span>
-                        </strong>
-                        <span class="ar-content"> فرق متخصصة حسب كل صناعة لضمان الفهم العميق.</span>
-                        <span class="en-content"> Teams specialized for each industry to ensure deep understanding.</span>
-                    </div>
-                </li>
-                <li class="feature-item">
-                    <i class="material-icons">cloud_done</i>
-                    <div>
-                        <strong>
-                            <span class="ar-content">نظام اتصال سحابي مملوك:</span>
-                            <span class="en-content">Owned Cloud Communication System:</span>
-                        </strong>
-                        <span class="ar-content"> يضمن الجودة والاستقرار في جميع الأوقات.</span>
-                        <span class="en-content"> Ensures quality and stability at all times.</span>
-                    </div>
-                </li>
-            </ul>
-            <ul class="feature-list">
-                <li class="feature-item">
-                    <i class="material-icons">trending_up</i>
-                    <div>
-                        <strong>
-                            <span class="ar-content">مرونة تشغيلية عالية:</span>
-                            <span class="en-content">High Operational Flexibility:</span>
-                        </strong>
-                        <span class="ar-content"> قدرة استيعابية متزايدة في مواسم الذروة.</span>
-                        <span class="en-content"> Increasing capacity during peak seasons.</span>
-                    </div>
-                </li>
-                <li class="feature-item">
-                    <i class="material-icons">assessment</i>
-                    <div>
-                        <strong>
-                            <span class="ar-content">تقارير أداء واضحة:</span>
-                            <span class="en-content">Clear Performance Reports:</span>
-                        </strong>
-                        <span class="ar-content"> قابلة للقياس والتحليل لاتخاذ قرارات مدروسة.</span>
-                        <span class="en-content"> Measurable and analyzable for informed decision-making.</span>
-                    </div>
-                </li>
-                <li class="feature-item">
-                    <i class="material-icons">policy</i>
-                    <div>
-                        <strong>
-                            <span class="ar-content">التزام صارم بالجودة:</span>
-                            <span class="en-content">Strict Quality Commitment:</span>
-                        </strong>
-                        <span class="ar-content"> خصوصية تامة وسياسات عمل موثوقة.</span>
-                        <span class="en-content"> Complete privacy and reliable work policies.</span>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    <!-- Slide 6: Our Core Services -->
-    <div class="slide" id="slide-6">
-        <div class="slide-number">05</div>
-        <h2 class="slide-title">
-            <span class="ar-content">خدماتنا الأساسية</span>
-            <span class="en-content">Our Core Services</span>
-        </h2>
-        <div class="grid-3">
-            <div class="service-card">
-                <i class="material-icons card-icon">headset_mic</i>
-                <div class="card-title">
-                    <span class="ar-content">خدمة العملاء وتجربة المستخدم</span>
-                    <span class="en-content">Customer Support & Experience Management</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <i class="material-icons card-icon">trending_up</i>
-                <div class="card-title">
-                    <span class="ar-content">دعم المبيعات وإدارة العملاء المحتملين</span>
-                    <span class="en-content">Sales Support & Lead Handling</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <i class="material-icons card-icon">work</i>
-                <div class="card-title">
-                    <span class="ar-content">الدعم الإداري والخلفي</span>
-                    <span class="en-content">Back Office & Operational Support</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <i class="material-icons card-icon">devices</i>
-                <div class="card-title">
-                    <span class="ar-content">الاتصال الشامل (هاتف - واتساب - إيميل - سوشيال ميديا)</span>
-                    <span class="en-content">Omnichannel Communication (Phone – WhatsApp – Email – Social Media)</span>
-                </div>
-            </div>
-            <div class="service-card">
-                <i class="material-icons card-icon">cloud_queue</i>
-                <div class="card-title">
-                    <span class="ar-content">أنظمة الاتصال السحابية</span>
-                    <span class="en-content">Cloud Communication Systems</span>
-                </div>
-            </div>
-            <div class="service-card" style="background: #f0f0f0; border: 1px dashed #999; display: flex; align-items: center; justify-content: center;">
-                <div style="font-size: 0.9rem; color: #666;">
-                    <span class="ar-content">التفاصيل الكاملة متوفرة في Service Profiles المتخصصة</span>
-                    <span class="en-content">Full details available in specialized Service Profiles</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 7: Industries We Serve -->
-    <div class="slide" id="slide-7">
-        <div class="slide-number">06</div>
-        <h2 class="slide-title">
-            <span class="ar-content">القطاعات التي نخدمها</span>
-            <span class="en-content">Industries We Serve</span>
-        </h2>
-        <p style="margin-bottom: 20px;">
-            <span class="ar-content">نخدم مجموعة واسعة من القطاعات، من خلال فرق متخصصة لكل صناعة:</span>
-            <span class="en-content">We serve a wide range of sectors through specialized teams for each industry:</span>
-        </p>
-        <div class="grid-3" style="margin-top: 30px;">
-            <div class="industry-card" onclick="openServiceModal('ecommerce')">
-                <i class="material-icons" style="color:var(--primary-purple)">shopping_cart</i>
-                <div>
-                    <span class="ar-content">التجارة الإلكترونية</span>
-                    <span class="en-content">E-commerce</span>
-                </div>
-            </div>
-            <div class="industry-card" onclick="openServiceModal('hotels')">
-                <i class="material-icons" style="color:var(--primary-purple)">hotel</i>
-                <div>
-                    <span class="ar-content">الفنادق والضيافة</span>
-                    <span class="en-content">Hotels & Hospitality</span>
-                </div>
-            </div>
-            <div class="industry-card" onclick="openServiceModal('education')">
-                <i class="material-icons" style="color:var(--primary-purple)">school</i>
-                <div>
-                    <span class="ar-content">التعليم والتدريب</span>
-                    <span class="en-content">Education & Training</span>
-                </div>
-            </div>
-            <div class="industry-card" onclick="openServiceModal('travel')">
-                <i class="material-icons" style="color:var(--primary-purple)">flight</i>
-                <div>
-                    <span class="ar-content">السفر والطيران</span>
-                    <span class="en-content">Travel & Aviation</span>
-                </div>
-            </div>
-            <div class="industry-card" onclick="openServiceModal('restaurants')">
-                <i class="material-icons" style="color:var(--primary-purple)">restaurant</i>
-                <div>
-                    <span class="ar-content">المطاعم والمطابخ</span>
-                    <span class="en-content">Restaurants & Kitchens</span>
-                </div>
-            </div>
-            <div class="industry-card" onclick="openServiceModal('finance')">
-                <i class="material-icons" style="color:var(--primary-purple)">account_balance</i>
-                <div>
-                    <span class="ar-content">الخدمات المالية والاستثمار</span>
-                    <span class="en-content">Financial Services & Investment</span>
-                </div>
-            </div>
-            <div class="industry-card" onclick="openServiceModal('pharmacy')">
-                <i class="material-icons" style="color:var(--primary-purple)">medical_services</i>
-                <div>
-                    <span class="ar-content">الصيدليات والرعاية الصحية</span>
-                    <span class="en-content">Pharmacies & Healthcare</span>
-                </div>
-            </div>
-            <div class="industry-card" onclick="openServiceModal('realestate')">
-                <i class="material-icons" style="color:var(--primary-purple)">home</i>
-                <div>
-                    <span class="ar-content">تطوير العقارات والوساطة</span>
-                    <span class="en-content">Real Estate Development & Brokerage</span>
-                </div>
-            </div>
-            <div class="industry-card" onclick="openServiceModal('cleaning')">
-                <i class="material-icons" style="color:var(--primary-purple)">cleaning_services</i>
-                <div>
-                    <span class="ar-content">خدمات التنظيف ومكافحة الحشرات</span>
-                    <span class="en-content">Cleaning & Pest Control Services</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 8: Our Operating Model -->
-    <div class="slide" id="slide-8">
-        <div class="slide-number">07</div>
-        <h2 class="slide-title">
-            <span class="ar-content">نموذج التشغيل</span>
-            <span class="en-content">Our Operating Model</span>
-        </h2>
-        <div class="timeline-container">
-            <div class="timeline-step">
-                <div class="step-circle">1</div>
-                <div class="step-title">
-                    <span class="ar-content">الاكتشاف والإعداد</span>
-                    <span class="en-content">Discovery & Onboarding</span>
-                </div>
-                <div class="step-desc">
-                    <span class="ar-content">فهم احتياجاتكم وأهدافكم</span>
-                    <span class="en-content">Understanding your needs and goals</span>
-                </div>
-            </div>
-            <div class="timeline-step">
-                <div class="step-circle">2</div>
-                <div class="step-title">
-                    <span class="ar-content">بناء الفريق والتدريب</span>
-                    <span class="en-content">Team Setup & Training</span>
-                </div>
-                <div class="step-desc">
-                    <span class="ar-content">اختيار الكوادر وتدريبها</span>
-                    <span class="en-content">Selecting and training staff</span>
-                </div>
-            </div>
-            <div class="timeline-step">
-                <div class="step-circle">3</div>
-                <div class="step-title">
-                    <span class="ar-content">التكامل والانطلاق</span>
-                    <span class="en-content">System Integration & Go-Live</span>
-                </div>
-                <div class="step-desc">
-                    <span class="ar-content">بدء العمليات بسلاسة</span>
-                    <span class="en-content">Starting operations smoothly</span>
-                </div>
-            </div>
-            <div class="timeline-step">
-                <div class="step-circle">4</div>
-                <div class="step-title">
-                    <span class="ar-content">الجودة والمراقبة</span>
-                    <span class="en-content">Quality Assurance & Monitoring</span>
-                </div>
-                <div class="step-desc">
-                    <span class="ar-content">ضمان التزام بالمعايير</span>
-                    <span class="en-content">Ensuring compliance with standards</span>
-                </div>
-            </div>
-            <div class="timeline-step">
-                <div class="step-circle">5</div>
-                <div class="step-title">
-                    <span class="ar-content">التقارير والتحسين</span>
-                    <span class="en-content">Reporting & Continuous Optimization</span>
-                </div>
-                <div class="step-desc">
-                    <span class="ar-content">تحليل البيانات والتطوير</span>
-                    <span class="en-content">Data analysis and development</span>
-                </div>
-            </div>
-        </div>
-        <p style="text-align: center; margin-top: 40px; color: var(--primary-purple); font-weight: 600;">
-            <span class="ar-content">نضمن انتقالًا سلسًا دون تعطيل أعمالك اليومية</span>
-            <span class="en-content">We ensure a smooth transition without disrupting your daily operations</span>
-        </p>
-    </div>
-
-    <!-- Slide 9: Quality, Compliance & Security -->
-    <div class="slide" id="slide-9">
-        <div class="slide-number">08</div>
-        <h2 class="slide-title">
-            <span class="ar-content">الجودة، الامتثال والأمان</span>
-            <span class="en-content">Quality, Compliance & Security</span>
-        </h2>
-        <div class="grid-2" style="margin-top: 40px;">
-            <div class="service-card" style="text-align: right;">
-                <div class="card-title" style="margin-bottom: 10px;">
-                    <span class="ar-content">إطار داخلي صارم لمراقبة الجودة</span>
-                    <span class="en-content">Strict Internal Quality Monitoring Framework</span>
-                </div>
-                <p style="font-size: 0.9rem; color: #666;">
-                    <span class="ar-content">معايير صارمة لتقييم الأداء والجودة.</span>
-                    <span class="en-content">Strict standards for performance and quality evaluation.</span>
-                </p>
-            </div>
-            <div class="service-card" style="text-align: right;">
-                <div class="card-title" style="margin-bottom: 10px;">
-                    <span class="ar-content">تسجيل ومراجعة المكالمات</span>
-                    <span class="en-content">Call Recording & Review</span>
-                </div>
-                <p style="font-size: 0.9rem; color: #666;">
-                    <span class="ar-content">ضمان الامتثال وتحسين الخدمة المستمر.</span>
-                    <span class="en-content">Ensuring compliance and continuous service improvement.</span>
-                </p>
-            </div>
-            <div class="service-card" style="text-align: right;">
-                <div class="card-title" style="margin-bottom: 10px;">
-                    <span class="ar-content">سياسات واضحة لحماية البيانات</span>
-                    <span class="en-content">Clear Data Protection Policies</span>
-                </div>
-                <p style="font-size: 0.9rem; color: #666;">
-                    <span class="ar-content">التزام تام بحماية معلومات العملاء.</span>
-                    <span class="en-content">Complete commitment to protecting customer information.</span>
-                </p>
-            </div>
-            <div class="service-card" style="text-align: right;">
-                <div class="card-title" style="margin-bottom: 10px;">
-                    <span class="ar-content">تدريب مستمر للفرق</span>
-                    <span class="en-content">Continuous Team Training</span>
-                </div>
-                <p style="font-size: 0.9rem; color: #666;">
-                    <span class="ar-content">برامج تطوير دائمة للموظفين.</span>
-                    <span class="en-content">Permanent development programs for employees.</span>
-                </p>
-            </div>
-        </div>
-        <div class="service-card" style="margin-top: 30px; text-align: center; background: #fff; border: 2px solid var(--primary-purple);">
-            <strong>
-                <span class="ar-content">التصعيد الذكي:</span>
-                <span class="en-content">Smart Escalation:</span>
-            </strong>
-            <span class="ar-content"> للحالات الحساسة حسب سياسة العميل.</span>
-            <span class="en-content"> For sensitive cases according to client policy.</span>
-        </div>
-    </div>
-
-    <!-- Slide 10: Our Team Structure -->
-    <div class="slide" id="slide-10">
-        <div class="slide-number">09</div>
-        <h2 class="slide-title">
-            <span class="ar-content">هيكل الفريق</span>
-            <span class="en-content">Our Team Structure</span>
-        </h2>
-        <div class="org-chart" style="margin-top: 50px;">
-            <div class="team-role manager">
-                <span class="ar-content">Account Manager مخصص لكل عميل</span>
-                <span class="en-content">Account Manager Dedicated for Each Client</span>
-            </div>
-            <div class="team-level">
-                <div style="width: 2px; height: 30px; background: #ccc;"></div>
-            </div>
-            <div class="team-level">
-                <div class="team-role">Team Supervisor</div>
-                <div class="team-role">Quality Assurance Specialist</div>
-                <div class="team-role">Technical & System Support</div>
-            </div>
-            <div class="team-level" style="width: 100%; display: flex; justify-content: space-around;">
-                <div style="width: 33%; height: 2px; background: #ccc;"></div>
-                <div style="width: 33%; height: 2px; background: #ccc;"></div>
-                <div style="width: 33%; height: 2px; background: #ccc;"></div>
-            </div>
-            <div class="team-level">
-                <div class="team-role" style="width: 60%;">
-                    <span class="ar-content">Trained Agents حسب الصناعة</span>
-                    <span class="en-content">Trained Agents by Industry</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 11: Why Partner With CallVa -->
-    <div class="slide" id="slide-11">
-        <div class="slide-number">10</div>
-        <h2 class="slide-title">
-            <span class="ar-content">لماذا تختار كالفا شريكاً لك؟</span>
-            <span class="en-content">Why Partner With CallVa?</span>
-        </h2>
-        <ul class="feature-list" style="margin-top: 30px;">
-            <li class="feature-item">
-                <i class="material-icons">savings</i>
-                <div>
-                    <strong>
-                        <span class="ar-content">خفض التكاليف التشغيلية:</span>
-                        <span class="en-content">Reducing Operational Costs:</span>
-                    </strong>
-                    <span class="ar-content"> تقليل ملحوظ في التكاليف مع الحفاظ على الجودة العالية.</span>
-                    <span class="en-content"> Significant cost reduction while maintaining high quality.</span>
-                </div>
-            </li>
-            <li class="feature-item">
-                <i class="material-icons">rocket_launch</i>
-                <div>
-                    <strong>
-                        <span class="ar-content">سرعة في التوسع:</span>
-                        <span class="en-content">Rapid Scaling:</span>
-                    </strong>
-                    <span class="ar-content"> قدرة سريعة على التوسع دون عبء التوظيف.</span>
-                    <span class="en-content"> Fast ability to scale without the burden of hiring.</span>
-                </div>
-            </li>
-            <li class="feature-item">
-                <i class="material-icons">verified_user</i>
-                <div>
-                    <strong>
-                        <span class="ar-content">استقرار في تجربة العميل:</span>
-                        <span class="en-content">Stability in Customer Experience:</span>
-                    </strong>
-                    <span class="ar-content"> تواصل متسق يعكس قيم وعلامتكم التجارية.</span>
-                    <span class="en-content"> Consistent communication that reflects your brand values.</span>
-                </div>
-            </li>
-            <li class="feature-item">
-                <i class="material-icons">analytics</i>
-                <div>
-                    <strong>
-                        <span class="ar-content">نتائج قابلة للقياس:</span>
-                        <span class="en-content">Measurable Results:</span>
-                    </strong>
-                    <span class="ar-content"> تقارير شاملة وشفافة للأداء.</span>
-                    <span class="en-content"> Comprehensive and transparent performance reports.</span>
-                </div>
-            </li>
-            <li class="feature-item">
-                <i class="material-icons">handshake</i>
-                <div>
-                    <strong>
-                        <span class="ar-content">شريك تشغيلي:</span>
-                        <span class="en-content">Operational Partner:</span>
-                    </strong>
-                    <span class="ar-content"> نفهم عملك لا مجرد مزوّد خدمة.</span>
-                    <span class="en-content"> We understand your business, not just a service provider.</span>
-                </div>
-            </li>
-        </ul>
-    </div>
-
-     <!-- Slide 12: Let's Talk -->
-    <div class="slide" id="slide-12">
-        <div class="slide-number">11</div>
-        <h2 class="slide-title" style="text-align: center;">Let's Talk</h2>
-        <div class="contact-info">
-            <h1 style="font-family: var(--font-en); font-size: 4rem; margin-bottom: 10px;">
-                <span style="color: white;">CallVa</span>
-            </h1>
-            <div style="font-size: 1.2rem; opacity: 0.9;">Cloud Communication & BPO Solutions</div>
-            <div class="contact-details">
-                <div class="contact-item">
-                    <i class="material-icons">email</i>
-                    <span class="en-font">Email: support@callva.net</span>
-                </div>
-                <div class="contact-item">
-                    <i class="material-icons">phone</i>
-                    <span class="en-font">Phone: +966115034019</span>
-                </div>
-                <div class="contact-item">
-                    <i class="material-icons">language</i>
-                    <span class="en-font">CallVa.net</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Navigation Controls -->
-    <div class="nav-container">
-        <button class="nav-btn" id="prevBtn" title="Previous Slide">
-            <i class="material-icons">arrow_forward</i>
-        </button>
-        <div class="progress-indicator">
-            <span id="currentSlide">1</span> / <span id="totalSlides">12</span>
-        </div>
-        <button class="nav-btn" id="nextBtn" title="Next Slide">
-            <i class="material-icons">arrow_back</i>
-        </button>
-        <button class="print-btn" onclick="window.print()" title="Print / Save as PDF">
-            <i class="material-icons">print</i>
-            <span>طباعة / PDF</span>
-        </button>
-    </div>
-</div>
-
-<!-- Service Profile Modal -->
-<div class="modal-overlay" id="serviceModal">
-    <div class="modal-container">
-        <div class="modal-header">
-            <div class="modal-title-large">
-                <i class="material-icons" id="modalIcon">business_center</i>
-                <span id="modalTitleText">Service Profile</span>
-            </div>
-            <div class="modal-actions">
-                <button class="modal-print" type="button" onclick="printServiceProfile()" title="طباعة Service Profile">
-                    <i class="material-icons">print</i>
-                </button>
-                <button class="modal-close" type="button" onclick="closeServiceModal()">
-                    <i class="material-icons">close</i>
-                </button>
-            </div>
-        </div>
+    <div class="container">
+        <h1>🎨 CSS Gradient Generator</h1>
         
-        <div class="modal-body">
-            <div class="modal-tabs">
-                <div class="modal-tab active" onclick="switchModalTab('ar')">العربية</div>
-                <div class="modal-tab" onclick="switchModalTab('en')">English</div>
+        <div class="main-content">
+            <div class="panel">
+                <div class="preview-box" id="preview"></div>
+                
+                <div class="controls-section">
+                    <h3>Gradient Type</h3>
+                    <div class="gradient-type-buttons">
+                        <button class="gradient-type-btn active" data-type="linear" onclick="setGradientType('linear')">Linear</button>
+                        <button class="gradient-type-btn" data-type="radial" onclick="setGradientType('radial')">Radial</button>
+                    </div>
+                </div>
+
+                <div class="controls-section" id="angle-control">
+                    <h3>Angle / Direction</h3>
+                    <div class="control-row">
+                        <label>Angle:</label>
+                        <input type="range" id="angle" min="0" max="360" value="90" oninput="updateGradient()">
+                        <input type="number" id="angle-number" min="0" max="360" value="90" oninput="updateGradient()">
+                        <span>deg</span>
+                    </div>
+                </div>
+
+                <div class="controls-section">
+                    <h3>Color Stops</h3>
+                    <div class="color-stops-container" id="color-stops"></div>
+                    <div class="button-group">
+                        <button class="btn btn-secondary" onclick="addColorStop()">+ Add Color</button>
+                    </div>
+                </div>
+
+                <div class="controls-section">
+                    <h3>Quick Presets</h3>
+                    <div class="preset-gradients" id="presets"></div>
+                    <button class="btn randomize-btn" onclick="randomize()">🎲 Randomize</button>
+                </div>
             </div>
+
+            <div class="panel">
+                <div class="code-output">
+                    <h3>Generated CSS</h3>
+                    <div class="code-block" id="css-output"></div>
+                </div>
+                
+                <div class="button-group">
+                    <button class="btn" onclick="copyToClipboard()">📋 Copy CSS</button>
+                    <button class="btn btn-secondary" onclick="downloadCSS()">💾 Download CSS</button>
+                    <button class="btn btn-secondary" onclick="copyAsBackground()">🖼️ Copy as Background</button>
+                </div>
+
+                <div class="controls-section" style="margin-top: 25px;">
+                    <h3>Live Usage Preview</h3>
+                    <div id="live-preview" style="height: 100px; border-radius: 10px; margin-top: 10px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        let gradientType = 'linear';
+        let colorStops = [
+            { color: '#00d9ff', position: 0 },
+            { color: '#00ff88', position: 100 }
+        ];
+
+        const presets = [
+            ['#667eea', '#764ba2'],
+            ['#f093fb', '#f5576c'],
+            ['#4facfe', '#00f2fe'],
+            ['#43e97b', '#38f9d7'],
+            ['#fa709a', '#fee140'],
+            ['#a8edea', '#fed6e3'],
+            ['#ff9a9e', '#fecfef'],
+            ['#ffecd2', '#fcb69f'],
+            ['#a1c4fd', '#c2e9fb'],
+            ['#d299c2', '#fef9d7'],
+            ['#89f7fe', '#66a6ff'],
+            ['#fddb92', '#d1fdff'],
+            ['#9890e3', '#b1f4cf'],
+            ['#ebc0fd', '#d9ded8'],
+            ['#96fbc4', '#f9f586']
+        ];
+
+        function init() {
+            renderColorStops();
+            renderPresets();
+            updateGradient();
+        }
+
+        function setGradientType(type) {
+            gradientType = type;
+            document.querySelectorAll('.gradient-type-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.type === type);
+            });
+            document.getElementById('angle-control').style.display = 
+                type === 'linear' ? 'block' : 'none';
+            updateGradient();
+        }
+
+        function renderColorStops() {
+            const container = document.getElementById('color-stops');
+            container.innerHTML = colorStops.map((stop, index) => `
+                <div class="color-stop">
+                    <input type="color" value="${stop.color}" onchange="updateColorStop(${index}, 'color', this.value)">
+                    <input type="number" value="${stop.position}" min="0" max="100" 
+                        onchange="updateColorStop(${index}, 'position', this.value)">
+                    <span>%</span>
+                    ${colorStops.length > 2 ? `<button class="btn-danger" style="padding: 5px 10px;" onclick="removeColorStop(${index})">×</button>` : ''}
+                </div>
+            `).join('');
+        }
+
+        function updateColorStop(index, property, value) {
+            colorStops[index][property] = value;
+            updateGradient();
+        }
+
+        function addColorStop() {
+            const lastPos = colorStops[colorStops.length - 1].position;
+            const newPos = Math.min(100, lastPos + 20);
+            colorStops.push({ color: getRandomColor(), position: newPos });
+            colorStops.sort((a, b) => a.position - b.position);
+            renderColorStops();
+            updateGradient();
+        }
+
+        function removeColorStop(index) {
+            if (colorStops.length > 2) {
+                colorStops.splice(index, 1);
+                renderColorStops();
+                updateGradient();
+            }
+        }
+
+        function renderPresets() {
+            const container = document.getElementById('presets');
+            container.innerHTML = presets.map((colors, index) => `
+                <div class="preset" style="background: linear-gradient(90deg, ${colors[0]}, ${colors[1]});" 
+                    onclick="applyPreset(${index})" title="Preset ${index + 1}"></div>
+            `).join('');
+        }
+
+        function applyPreset(index) {
+            const colors = presets[index];
+            gradientType = Math.random() > 0.5 ? 'linear' : 'radial';
+            document.querySelectorAll('.gradient-type-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.type === gradientType);
+            });
+            document.getElementById('angle-control').style.display = 
+                gradientType === 'linear' ? 'block' : 'none';
             
-            <div id="modalContent">
-                <!-- Content will be loaded dynamically -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Slide Navigation
-    document.addEventListener('DOMContentLoaded', () => {
-        const slides = document.querySelectorAll('.slide');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        const currentSlideDisplay = document.getElementById('currentSlide');
-        const totalSlidesDisplay = document.getElementById('totalSlides');
-        const langToggle = document.getElementById('langToggle');
-        const langText = document.getElementById('langText');
-        
-        let currentIndex = 0;
-        const totalSlides = slides.length;
-        let isEnglish = false;
-        let currentModalLang = 'ar';
-        let currentService = null;
-
-        totalSlidesDisplay.textContent = totalSlides;
-
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                slide.classList.remove('active');
-                if (i === index) {
-                    slide.classList.add('active');
-                }
-            });
-            currentSlideDisplay.textContent = index + 1;
-        }
-
-        function nextSlide() {
-            if (currentIndex < totalSlides - 1) {
-                currentIndex++;
-                showSlide(currentIndex);
-            } else {
-                currentIndex = 0; 
-                showSlide(currentIndex);
-            }
-        }
-
-        function prevSlide() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                showSlide(currentIndex);
-            } else {
-                currentIndex = totalSlides - 1;
-                showSlide(currentIndex);
-            }
-        }
-
-        function toggleLanguage() {
-            isEnglish = !isEnglish;
-            document.body.classList.toggle('en-version');
+            colorStops = [
+                { color: colors[0], position: 0 },
+                { color: colors[1], position: 100 }
+            ];
+            document.getElementById('angle').value = Math.floor(Math.random() * 360);
+            document.getElementById('angle-number').value = document.getElementById('angle').value;
             
-            if (isEnglish) {
-                document.documentElement.setAttribute('dir', 'ltr');
-                langText.textContent = 'العربية';
-            } else {
-                document.documentElement.setAttribute('dir', 'rtl');
-                langText.textContent = 'English';
+            renderColorStops();
+            updateGradient();
+        }
+
+        function randomize() {
+            const numColors = Math.floor(Math.random() * 3) + 2;
+            colorStops = [];
+            for (let i = 0; i < numColors; i++) {
+                colorStops.push({
+                    color: getRandomColor(),
+                    position: Math.floor((i / (numColors - 1)) * 100)
+                });
             }
+            gradientType = Math.random() > 0.5 ? 'linear' : 'radial';
+            document.querySelectorAll('.gradient-type-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.type === gradientType);
+            });
+            document.getElementById('angle-control').style.display = 
+                gradientType === 'linear' ? 'block' : 'none';
+            document.getElementById('angle').value = Math.floor(Math.random() * 360);
+            document.getElementById('angle-number').value = document.getElementById('angle').value;
             
-            // If a service modal is open, update its language
-            if (currentService) {
-                loadServiceContent(currentService, currentModalLang);
+            renderColorStops();
+            updateGradient();
+        }
+
+        function getRandomColor() {
+            const chars = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += chars[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function generateCSS() {
+            const sortedStops = [...colorStops].sort((a, b) => a.position - b.position);
+            const stopsStr = sortedStops.map(s => `${s.color} ${s.position}%`).join(', ');
+            
+            if (gradientType === 'linear') {
+                const angle = document.getElementById('angle').value;
+                return `background: linear-gradient(${angle}deg, ${stopsStr});`;
+            } else {
+                return `background: radial-gradient(circle, ${stopsStr});`;
             }
         }
 
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
-        langToggle.addEventListener('click', toggleLanguage);
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                if (isEnglish) {
-                    nextSlide();
-                } else {
-                    prevSlide();
-                }
-            } else if (e.key === 'ArrowRight') {
-                if (isEnglish) {
-                    prevSlide();
-                } else {
-                    nextSlide();
-                }
-            } else if (e.key === 'Escape') {
-                closeServiceModal();
-            }
-        });
-    });
-
-    // Service Modal Functions
-    function openServiceModal(service) {
-        currentService = service;
-        const modal = document.getElementById('serviceModal');
-        const modalTitle = document.getElementById('modalTitleText');
-        const modalIcon = document.getElementById('modalIcon');
-        const isEnglish = document.body.classList.contains('en-version');
-        currentModalLang = isEnglish ? 'en' : 'ar';
-        
-        // Set Icon based on service
-        const icons = {
-            'ecommerce': 'shopping_cart',
-            'hotels': 'hotel',
-            'education': 'school',
-            'travel': 'flight',
-            'restaurants': 'restaurant',
-            'finance': 'account_balance',
-            'pharmacy': 'medical_services',
-            'realestate': 'home',
-            'cleaning': 'cleaning_services'
-        };
-        
-        if (icons[service]) {
-            modalIcon.textContent = icons[service];
-        }
-        
-        // Update active tab
-        const tabs = document.querySelectorAll('.modal-tab');
-        tabs.forEach(tab => tab.classList.remove('active'));
-        tabs[currentModalLang === 'ar' ? 0 : 1].classList.add('active');
-        
-        loadServiceContent(service, currentModalLang);
-        modal.classList.add('active');
-    }
-
-    function closeServiceModal() {
-        document.getElementById('serviceModal').classList.remove('active');
-        currentService = null;
-    }
-
-    function switchModalTab(lang) {
-        currentModalLang = lang;
-        
-        // Update active tab
-        const tabs = document.querySelectorAll('.modal-tab');
-        tabs.forEach(tab => tab.classList.remove('active'));
-        tabs[lang === 'ar' ? 0 : 1].classList.add('active');
-        
-        if (currentService) {
-            loadServiceContent(currentService, lang);
-        }
-    }
-
-    function loadServiceContent(service, lang) {
-        const modalContent = document.getElementById('modalContent');
-        const modalTitle = document.getElementById('modalTitleText');
-        
-        // Service data objects
-        const services = {
-            ecommerce: {
-                title: { ar: 'التجارة الإلكترونية', en: 'E-commerce' },
-                icon: 'shopping_cart',
-                about: { 
-                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لشركات التجارة الإلكترونية تركز على إدارة تجربة العميل قبل الشراء وبعده. نعمل كامتداد مباشر لعلامتك التجارية، مع فرق مدربة.`,
-                    en: `We offer integrated BPO and cloud communication solutions tailored for e-commerce companies, focusing on managing customer experience before and after purchase. We act as a direct extension of your brand, with trained teams.`
-                },
-                benefits: {
-                    ar: `نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي) عن طريق نظام الاتصال السحابي الخاص بنا. نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت.`,
-                    en: `We provide multi-channel customer support (phone, WhatsApp, email, social media) through our cloud communication system. We provide modern offices, equipment, and stable high-speed internet.`
-                },
-                industry: { ar: 'المتاجر الإلكترونية', en: 'E-commerce stores' },
-                challenges: [
-                    { ar: 'تأخر الرد يؤدي إلى فقدان المبيعات قبل الشراء', en: 'Delayed response leads to lost sales before purchase' },
-                    { ar: 'تتبع الشحنات والاسترجاع', en: 'Tracking shipments and returns' },
-                    { ar: 'سلات متروكة وشكاوى التأخير', en: 'Abandoned carts and delay complaints' },
-                    { ar: 'طلبات وهمية كثيرة', en: 'Many fake orders (COD)' },
-                    { ar: 'ضغط شديد في المواسم والعروض', en: 'Severe pressure during seasons and promotions' },
-                    { ar: 'تقييمات سلبية على منصات التواصل', en: 'Negative ratings on social platforms' }
-                ],
-                solution: [
-                    { ar: 'فريق دعم 24/7 للرد على استفسارات وحل شكاوى العملاء', en: '24/7 support team to respond to inquiries and resolve complaints' },
-                    { ar: 'أتمتة الردود الشائعة', en: 'Automation of common responses' },
-                    { ar: 'تأكيد جميع الطلبات يوميًا', en: 'Confirming all orders daily' },
-                    { ar: 'متابعة استرداد السلات المتروكة يوميًا', en: 'Daily follow-up on abandoned carts' },
-                    { ar: 'جمع آراء جميع عملائك يوميًا', en: 'Collecting opinions from all your customers daily' }
-                ],
-                roi: [
-                    { ar: 'زيادة معدل التحويل', en: 'Increase conversion rate' },
-                    { ar: 'خفض زمن الاستجابة', en: 'Reduce response time' },
-                    { ar: 'رفع CSAT و NPS', en: 'Raise CSAT and NPS' },
-                    { ar: 'قطع تكاليف شحن الطلبات الوهمية', en: 'Cut shipping costs for fake orders' },
-                    { ar: 'استقرار الأداء في مواسم الذروة', en: 'Stable performance during peak seasons' }
-                ]
-            },
-            hotels: {
-                title: { ar: 'الفنادق والضيافة', en: 'Hotels & Hospitality' },
-                icon: 'hotel',
-                about: { 
-                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة للفنادق تركز على إدارة تواصل النزلاء والحجوزات.`,
-                    en: `We offer integrated BPO and cloud communication solutions tailored for hotels, focusing on managing guest communication and reservations.`
-                },
-                benefits: {
-                    ar: `نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي). نوفر مكاتب وأجهزة حديثة و انترنت سريع ثابت.`,
-                    en: `We provide multi-channel customer support (phone, WhatsApp, email, social media). We provide modern offices, equipment, and stable high-speed internet.`
-                },
-                industryOverview: {
-                    ar: `حجم السوق: كبير، ويشمل الفنادق، المنتجعات، والشقق الفندقية. حدة المنافسة: مرتفعة.`,
-                    en: `Market Size: Large, includes hotels, resorts, and hotel apartments. Competition Level: High.`
-                },
-                challenges: [
-                    { ar: 'طول وتعقيد قرار الحجز', en: 'Length and complexity of booking decision' },
-                    { ar: 'فقدان الحجوزات بسبب ضعف المتابعة', en: 'Loss of reservations due to poor follow-up' },
-                    { ar: 'ضعف استغلال فرص زيادة الإيراد', en: 'Poor exploitation of opportunities to increase revenue' },
-                    { ar: 'تأخر أو سوء إدارة الشكاوى', en: 'Delay or poor management of complaints' },
-                    { ar: 'غياب نظام منظم لجمع وتحليل الملاحظات', en: 'Absence of an organized system for collecting feedback' }
-                ],
-                solution: [
-                    { ar: 'فرق متخصصة لإدارة الحجوزات', en: 'Specialized teams for reservation management' },
-                    { ar: 'تنفيذ Upselling مدروس (ترقيات، خدمات إضافية)', en: 'Executing thoughtful upselling (upgrades, additional services)' },
-                    { ar: 'استقبال الشكاوى وحلها في إطار سياسة الفندق', en: 'Receiving complaints and resolving them within hotel policy' },
-                    { ar: 'إجراء مكالمات متابعة بعد الإقامة', en: 'Conducting follow-up calls after stay' }
-                ],
-                roi: [
-                    { ar: 'زيادة نسبة تحويل الاستفسارات إلى حجوزات', en: 'Increase conversion rate of inquiries to reservations' },
-                    { ar: 'رفع متوسط قيمة الحجز', en: 'Raise average booking value' },
-                    { ar: 'تحسين تجربة النزيل وسمعة الفندق', en: 'Improve guest experience and hotel reputation' }
-                ]
-            },
-            education: {
-                title: { ar: 'التعليم والتدريب', en: 'Education & Training' },
-                icon: 'school',
-                about: { 
-                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لمراكز الكورسات. نعمل كامتداد مباشر للمركز.`,
-                    en: `We offer integrated BPO and cloud communication solutions tailored for course centers. We act as a direct extension of the center.`
-                },
-                benefits: {
-                    ar: `نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي). نوفر مكاتب وأجهزة حديثة.`,
-                    en: `We provide multi-channel customer support (phone, WhatsApp, email, social media). We provide modern offices and equipment.`
-                },
-                challenges: [
-                    { ar: 'طلب غير ثابت (ذروة ثم هدوء)', en: 'Unstable demand (peak then lull)' },
-                    { ar: 'المختص يرد بمعلومات فقط، غير مدرّب على التحويل', en: 'Specialist responds with info only, not trained on conversion' },
-                    { ar: 'غياب بيانات عن أسباب التردد', en: 'Absence of data on reasons for hesitation' },
-                    { ar: 'قياس الأداء يركز على نشاط (مكالمات/سرعة) وليس على التسجيلات الفعلية', en: 'Performance measurement focuses on activity (calls/speed) rather than actual registrations' },
-                    { ar: 'إهمال قاعدة الطلبة السابقين', en: 'Neglecting the base of previous students' }
-                ],
-                solution: [
-                    { ar: 'التواصل مع الطلبة المهتمة من حملات التسويق', en: 'Communicating with interested students from marketing campaigns' },
-                    { ar: 'إدارة متكاملة لجميع قنوات التواصل', en: 'Integrated management of all communication channels' },
-                    { ar: 'نقود المحادثة من مجرد استفسار إلى قرار تسجيل', en: 'We lead the conversation from just an inquiry to a registration decision' },
-                    { ar: 'ننفّذ أنشطة Upselling و Cross Selling', en: 'We execute Upselling and Cross Selling activities' },
-                    { ar: 'إعادة تنشيط الطلبة السابقين', en: 'Systematically reactivating previous students' }
-                ],
-                roi: [
-                    { ar: 'زيادة معدلات تحويل الاستفسارات', en: 'Increase conversion rates from inquiries' },
-                    { ar: 'تقليل ضياع الفرص', en: 'Reduce lost opportunities during pressure and peak periods' },
-                    { ar: 'تحسين جودة تجربة الطالب', en: 'Improve quality of student experience' },
-                    { ar: 'زيادة القيمة على المدى الطويل', en: 'Increase value over the long term' }
-                ]
-            },
-            travel: {
-                title: { ar: 'السفر والطيران', en: 'Travel & Aviation' },
-                icon: 'flight',
-                about: { 
-                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لمكاتب وشركات السياحة.`,
-                    en: `We offer integrated BPO and cloud communication solutions tailored for travel offices and companies.`
-                },
-                benefits: {
-                    ar: `نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، ايميل، تواصل اجتماعي). نوفر مكاتب وأجهزة حديثة.`,
-                    en: `We provide multi-channel customer support (phone, WhatsApp, email, social media). We provide modern offices and equipment.`
-                },
-                challenges: [
-                    { ar: 'طول وتعقيد قرار الحجز', en: 'Length and complexity of booking decision' },
-                    { ar: 'حساسية التوقيت وتأثير سرعة الرد', en: 'Timing sensitivity and impact of response speed' },
-                    { ar: 'سهولة انتقال العميل', en: 'Ease of customer movement' },
-                    { ar: 'غياب رؤية واضحة', en: 'Absence of clear vision' }
-                ],
-                solution: [
-                    { ar: 'إدارة قرار الحجز', en: 'Managing booking decision' },
-                    { ar: 'عرض وترقية البرامج', en: 'Presenting and upgrading programs' },
-                    { ar: 'متابعة منظمة', en: 'Organized follow-up' },
-                    { ar: 'إدارة الإلغاءات', en: 'Managing cancellations' }
-                ],
-                roi: [
-                    { ar: 'زيادة نسبة تحويل الاستفسارات', en: 'Increase conversion rate of inquiries' },
-                    { ar: 'تقليل فقدان العملاء', en: 'Reduce customer loss' },
-                    { ar: 'رفع قيمة الحجز', en: 'Raise booking value' }
-                ]
-            },
-            restaurants: {
-                title: { ar: 'المطاعم والمطابخ', en: 'Restaurants & Kitchens' },
-                icon: 'restaurant',
-                about: { 
-                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة للمطاعم.`,
-                    en: `We offer integrated BPO and cloud communication solutions tailored for restaurants.`
-                },
-                benefits: {
-                    ar: `نوفر دعم عملاء متعدد القنوات (هاتف، واتساب، تواصل اجتماعي). نوفر مكاتب وأجهزة حديثة.`,
-                    en: `We provide multi-channel customer support (phone, WhatsApp, social media). We provide modern offices and equipment.`
-                },
-                challenges: [
-                    { ar: 'منصات التوصيل', en: 'Delivery platforms' },
-                    { ar: 'تركّز على جذب طلبات جديدة', en: 'Focus only on attracting new orders' },
-                    { ar: 'التأخر في الرد', en: 'Delayed response' },
-                    { ar: 'حالات تلف الطلب', en: 'Order damage cases' }
-                ],
-                solution: [
-                    { ar: 'نوفر فرقًا متخصصة', en: 'We provide specialized teams' },
-                    { ar: 'تجميع وحفظ بيانات العملاء', en: 'Collecting and saving customer data' },
-                    { ar: 'إدارة الحوار', en: 'Managing the dialogue' },
-                    { ar: 'متابعة لحظة بلحظة', en: 'Monitoring moment by moment' }
-                ],
-                roi: [
-                    { ar: 'زيادة الطلبات المتكررة', en: 'Increase repeat orders' },
-                    { ar: 'رفع متوسط قيمة الطلب', en: 'Raise average order value' },
-                    { ar: 'تحسين سمعة المطعم', en: 'Improve restaurant reputation' }
-                ]
-            },
-            finance: {
-                title: { ar: 'الخدمات المالية والاستثمار', en: 'Financial Services & Investment' },
-                icon: 'account_balance',
-                about: { 
-                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة لشركات التمويل.`,
-                    en: `We offer integrated BPO and cloud communication solutions tailored for finance companies.`
-                },
-                benefits: {
-                    ar: `فرق مدربة على الامتثال المالي وعدم تقديم استشارات. سياسات أمان صارمة.`,
-                    en: `Teams trained on financial compliance and not providing consultations. Strict security policies.`
-                },
-                industry: { ar: 'شركات التمويل غير المصرفي', en: 'Non-bank financing and brokerage companies' },
-                challenges: [
-                    { ar: 'كثرة الاستفسارات التنظيمية', en: 'Many regulatory inquiries' },
-                    { ar: 'ارتفاع تكلفة توظيف', en: 'High cost of hiring' },
-                    { ar: 'عدم متابعة تحصيلات', en: 'Ineffective follow-up on collections' }
-                ],
-                solution: [
-                    { ar: 'فرق مدربة على الامتثال المالي', en: 'Teams trained on financial compliance' },
-                    { ar: 'تسجيل ومراقبة الجودة', en: 'Recording and monitoring quality' },
-                    { ar: 'الرد الفوري', en: 'Immediate response' },
-                    { ar: 'فرق متابعة تحصيلات', en: 'Collection follow-up teams' }
-                ],
-                roi: [
-                    { ar: 'زيادة قاعدة العملاء', en: 'Increase customer base' },
-                    { ar: 'تحسين الصورة الذهنية', en: 'Improve mental image' },
-                    { ar: 'رفع الإنتاجية', en: 'Increase productivity' },
-                    { ar: 'تقليل غموض الإجراءات', en: 'Reduce ambiguity of procedures' }
-                ]
-            },
-            pharmacy: {
-                title: { ar: 'الصيدليات والرعاية الصحية', en: 'Pharmacies & Healthcare' },
-                icon: 'medical_services',
-                about: { 
-                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة للصيدليات.`,
-                    en: `We offer integrated BPO and cloud communication solutions tailored for pharmacies.`
-                },
-                benefits: {
-                    ar: `مركز اتصال مخصص باسم الصيدلية. دعم عملاء متعدد القنوات.`,
-                    en: `Dedicated call center in the name of the pharmacy. Multi-channel customer support.`
-                },
-                industry: { ar: 'سلاسل الصيدليات والصيدليات المستقلة', en: 'Pharmacy chains and independent pharmacies' },
-                challenges: [
-                    { ar: 'ضغط مكالمات العملاء', en: 'High pressure of customer calls' },
-                    { ar: 'فقدان فرص Cross-Selling', en: 'Lost Cross-Selling opportunities' },
-                    { ar: 'تجربة عميل غير مستقرة', en: 'Unstable customer experience' },
-                    { ar: 'تكلفة تشغيل مرتفعة', en: 'High operating costs' }
-                ],
-                solution: [
-                    { ar: 'الرد على استفسارات', en: 'Responding to inquiries' },
-                    { ar: 'التحقق من توافر الأدوية', en: 'Checking drug availability' },
-                    { ar: 'دعم حملات التسويق', en: 'Supporting marketing campaigns' },
-                    { ar: 'توفير أطباء معتمدين', en: 'Providing certified specialized doctors' }
-                ],
-                roi: [
-                    { ar: 'تجربة عميل أكثر راحة', en: 'More comfortable customer experience' },
-                    { ar: 'تقييمات أفضل', en: 'Better ratings' },
-                    { ar: 'خفض تكاليف التشغيل', en: 'Reduce operating costs' }
-                ]
-            },
-            realestate: {
-                title: { ar: 'التطوير والوساطة العقارية', en: 'Real Estate Development & Brokerage' },
-                icon: 'home',
-                about: { 
-                    ar: `نقدم حلول تعهيد و اسناد الاعمال الخارجية (BPO)و انظمة تواصل سحابية متكاملة مخصصة للعقارات.`,
-                    en: `We offer integrated BPO and cloud communication solutions tailored for real estate.`
-                },
-                benefits: {
-                    ar: `مركز اتصال مخصص لإدارة الـ Leads. رد فوري على جميع القنوات.`,
-                    en: `Dedicated call center for managing Leads. Immediate response on all channels.`
-                },
-                industry: { ar: 'شركات التطوير العقاري والوساطة', en: 'Real estate development and brokerage companies' },
-                challenges: [
-                    { ar: 'ركود العمليات البيعية', en: 'Stagnation of sales operations' },
-                    { ar: 'فقدان Leads', en: 'Loss of Leads' },
-                    { ar: 'متابعة غير منتظمة', en: 'Irregular follow-up' },
-                    { ar: 'عدم استغلال قواعد بيانات', en: 'Not exploiting old databases' }
-                ],
-                solution: [
-                    { ar: 'تأهيل أولي للعميل', en: 'Initial qualification of client' },
-                    { ar: 'جدولة مواعيد المعاينة', en: 'Scheduling viewings' },
-                    { ar: 'تقارير دورية', en: 'Periodic reports' },
-                    { ar: 'خدمة Outbound', en: 'Outbound service' }
-                ],
-                roi: [
-                    { ar: 'زيادة معدل اغلاق الصفقات', en: 'Increase deal closing rate' },
-                    { ar: 'توفير Leads مؤهلة', en: 'Provide qualified Leads' },
-                    { ar: 'تجربة شراء فريدة', en: 'Unique buying experience' }
-                ]
-            },
-            cleaning: {
-                title: { ar: 'خدمات التنظيف ومكافحة الحشرات', en: 'Cleaning & Pest Control Services' },
-                icon: 'cleaning_services',
-                about: { 
-                    ar: `نقدّم حلول تعهيد أعمال (BPO) وأنظمة تواصل سحابية متكاملة صُمّمت خصيصًا لشركات النظافة.`,
-                    en: `We offer integrated BPO and cloud communication solutions specifically designed for cleaning companies.`
-                },
-                benefits: {
-                    ar: `فرقنا مدرّبة على طبيعة خدمات النظافة. نوفر مكاتب مجهّزة.`,
-                    en: `Our teams are trained on the nature of cleaning services. We provide equipped offices.`
-                },
-                challenges: [
-                    { ar: 'التأخر في الرد على الاستفسارات', en: 'Delay in responding to urgent inquiries' },
-                    { ar: 'غياب المتابعة بعد تقديم الخدمة', en: 'Absence of follow-up after providing service' },
-                    { ar: 'صعوبة التعامل مع الشكاوى', en: 'Difficulty in handling complaints' },
-                    { ar: 'كثرة استفسارات العملاء', en: 'Many customer inquiries' }
-                ],
-                solution: [
-                    { ar: 'نوفر فرقًا متخصصة', en: 'We provide specialized teams' },
-                    { ar: 'نقوم بتجميع وحفظ بيانات العملاء', en: 'We collect and save customer data' },
-                    { ar: 'يتم تحديد التكلفة', en: 'Cost is determined' },
-                    { ar: 'نقدّم تقارير أداء', en: 'We provide comprehensive monthly performance reports' }
-                ],
-                roi: [
-                    { ar: 'زيادة الطلبات المتكررة', en: 'Increase repeat orders' },
-                    { ar: 'رفع متوسط قيمة الطلب', en: 'Raise average order value' },
-                    { ar: 'تحسين سمعة الشركة', en: 'Improve company reputation' }
-                ]
-            }
-        };
-
-        // Load content based on service and language
-        const data = services[service];
-        
-        let html = '';
-
-        // 1. About Section (Large Highlight Card)
-        html += `
-            <div class="section-block">
-                <div class="info-card" style="background: var(--gradient-soft);">
-                    <div class="section-title">
-                        <i class="material-icons">business_center</i>
-                        <span>${lang === 'ar' ? 'عن شركتنا في هذا المجال' : 'About Our Company in This Field'}</span>
-                    </div>
-                    <div style="font-size: 1.1rem; line-height: 1.8; color: var(--text-dark); margin-top: 10px;">
-                        ${data.about[lang]}
-                    </div>
-                </div>
-            </div>
-        `;
-
-        // 2. Industry Overview (if exists)
-        if (data.industry || data.industryOverview) {
-            const content = data.industry || data.industryOverview;
-            html += `
-                <div class="section-block">
-                    <div class="section-title">
-                        <i class="material-icons">insights</i>
-                        <span>${lang === 'ar' ? 'نظرة عامة على الصناعة' : 'Industry Overview'}</span>
-                    </div>
-                    <div class="info-card">
-                        ${content[lang]}
-                    </div>
-                </div>
-            `;
+        function updateGradient() {
+            const css = generateCSS();
+            const preview = document.getElementById('preview');
+            const livePreview = document.getElementById('live-preview');
+            const output = document.getElementById('css-output');
+            
+            preview.style.cssText = css;
+            livePreview.style.cssText = css;
+            output.textContent = css;
+            
+            document.getElementById('angle-number').value = document.getElementById('angle').value;
         }
 
-        // 3. Challenges (Grid of Warning Cards)
-        if (data.challenges && data.challenges.length > 0) {
-            html += `
-                <div class="section-block">
-                    <div class="section-title">
-                        <i class="material-icons" style="color:#D32F2F">warning</i>
-                        <span>${lang === 'ar' ? 'المشاكل التي تواجه الصناعة' : 'Industry Challenges'}</span>
-                    </div>
-                    <div class="challenge-list">
-            `;
-            data.challenges.forEach(item => {
-                html += `<div class="challenge-item"><i class="material-icons" style="font-size:1.2rem; margin-left: 10px;">error_outline</i> ${item[lang]}</div>`;
+        function copyToClipboard() {
+            const css = generateCSS();
+            navigator.clipboard.writeText(css).then(() => {
+                showToast('CSS copied to clipboard!');
             });
-            html += `
-                    </div>
-                </div>
-            `;
         }
 
-        // 4. Solution (Grid of Feature Cards)
-        if (data.solution && data.solution.length > 0) {
-            html += `
-                <div class="section-block">
-                    <div class="section-title">
-                        <i class="material-icons" style="color:var(--secondary-blue)">lightbulb</i>
-                        <span>${lang === 'ar' ? 'الحل الذي تقدمه شركتنا' : 'Our Solution'}</span>
-                    </div>
-                    <div class="solution-list">
-            `;
-            data.solution.forEach(item => {
-                html += `<div class="solution-item"><i class="material-icons" style="margin-bottom:10px; display:block;">check_circle</i> ${item[lang]}</div>`;
+        function copyAsBackground() {
+            const css = generateCSS();
+            const fullCSS = `background: linear-gradient(#fff, #fff); /* Placeholder for copy */\n${css}`;
+            navigator.clipboard.writeText(css).then(() => {
+                showToast('Background property copied!');
             });
-            html += `
-                    </div>
-                </div>
-            `;
-        }
-        
-        // 5. Benefits (Highlights)
-        if (data.benefits) {
-             html += `
-                <div class="section-block">
-                    <div class="section-title">
-                        <i class="material-icons">verified</i>
-                        <span>${lang === 'ar' ? 'الفوائد' : 'Benefits'}</span>
-                    </div>
-                    <div class="highlight-card">
-                        <i class="material-icons">stars</i>
-                        <div style="font-size: 1rem;">${data.benefits[lang]}</div>
-                    </div>
-                </div>
-            `;
         }
 
-        // 6. ROI (Gradient Section)
-        if (data.roi && data.roi.length > 0) {
-            html += `
-                <div class="section-block">
-                    <div class="roi-section">
-                        <div class="roi-title">
-                            <i class="material-icons">trending_up</i>
-                            <span>${lang === 'ar' ? 'العائد على الصناعة' : 'Industry ROI'}</span>
-                        </div>
-                        <div class="roi-grid">
-            `;
-            data.roi.forEach(item => {
-                html += `<div class="roi-item">${item[lang]}</div>`;
-            });
-            html += `
-                        </div>
-                    </div>
-                </div>
-            `;
+        function downloadCSS() {
+            const css = generateCSS();
+            const fullCSS = `/* Generated CSS Gradient */\n${css}`;
+            const blob = new Blob([fullCSS], { type: 'text/css' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'gradient.css';
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast('CSS file downloaded!');
         }
-        
-        modalContent.innerHTML = html;
-    }
 
-    // Print only the currently open Service Profile
-    function printServiceProfile() {
-        const modal = document.getElementById('serviceModal');
-        if (!modal.classList.contains('active')) return; // لا يوجد Service Profile مفتوح
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
 
-        const body = document.body;
-        body.classList.add('print-service');
-
-        const handleAfterPrint = () => {
-            body.classList.remove('print-service');
-            window.removeEventListener('afterprint', handleAfterPrint);
-        };
-
-        window.addEventListener('afterprint', handleAfterPrint);
-        window.print();
-    }
-</script>
-
+        // Initialize
+        init();
+    </script>
 </body>
 </html>
